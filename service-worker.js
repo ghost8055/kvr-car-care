@@ -1,7 +1,11 @@
-const CACHE_NAME = "kvr-car-care-v2";
+const CACHE_NAME = "kvr-car-care-v3";
 const APP_SHELL = [
   "./index.html",
+  "./owner.html",
+  "./customer.html",
   "./manifest.webmanifest",
+  "./manifest-owner.webmanifest",
+  "./manifest-customer.webmanifest",
   "./assets/kvr-workshop.png",
   "./assets/kvr-signboard.png",
   "./assets/kvr-app-icon.svg",

@@ -9,7 +9,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="KVR Car Care">
-  <link rel="manifest" href="manifest.webmanifest">
+  <link id="app-manifest" rel="manifest" href="manifest.webmanifest">
+  <script>
+    window.kvrAppMode = new URLSearchParams(location.search).get("app");
+    if (window.kvrAppMode === "owner" || window.kvrAppMode === "customer") {
+      document.getElementById("app-manifest").href = `manifest-${window.kvrAppMode}.webmanifest`;
+    }
+  </script>
   <link rel="icon" href="assets/kvr-app-icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/kvr-app-icon.png">
   <title>KVR Car Care | Workshop portal</title>
@@ -39,10 +45,32 @@
     .nav button:hover,.job-action:hover,.icon-button:hover{transform:translateY(-1px)}
     .status.progress:before{animation:kvr-status-pulse 1.8s ease-in-out infinite}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-    @media print{body *{visibility:hidden!important}.invoice-print,.invoice-print *{visibility:visible!important}.invoice-print{position:absolute;inset:0;width:100%;padding:0!important}.modal-backdrop{position:static;display:block!important;padding:0;background:white}.modal-backdrop:not(.printing){display:none!important}.modal{width:100%;max-height:none;overflow:visible;box-shadow:none}.modal-head,.modal-foot{display:none!important}.invoice{padding:20px}}
+    .login-gate{position:fixed;inset:0;z-index:40;display:grid;place-items:center;overflow:auto;padding:20px;background:radial-gradient(ellipse at 86% 12%,#f8db6b 0,transparent 30%),linear-gradient(145deg,#153f35,#0f2c25);color:#fff}.login-gate[hidden]{display:none}.login-card{width:min(430px,100%);padding:26px;border:1px solid #ffffff24;border-radius:16px;background:#ffffff12;box-shadow:0 24px 80px #06191454;backdrop-filter:blur(14px);animation:kvr-rise-in .45s both}.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}.login-brand .brand-icon{width:44px;height:44px}.login-brand strong{display:block;font-family:var(--display);font-size:20px;letter-spacing:-.05em}.login-brand small{color:#c6ddd1;font-size:10px}.login-card h1{margin:0 0 7px;font-family:var(--display);font-size:22px;letter-spacing:-.04em}.login-card>p{margin:0 0 17px;color:#c7d7cf;font-size:11px;line-height:1.6}.role-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}.role-pick button{min-height:39px;border:1px solid #ffffff38;border-radius:7px;background:#ffffff0b;color:#e5eee9;font-size:11px;font-weight:700}.role-pick button.active{border-color:var(--lime);background:#c8ec7020;color:var(--lime)}.login-card .form-field label{color:#e0e9e3}.login-card .form-field input{min-height:43px}.login-card .button{width:100%;margin-top:5px}.demo-note{margin-top:15px!important;padding:10px;border:1px solid #ffffff25;border-radius:7px;background:#091d1733;color:#d4e0d9!important;font-size:9px!important}.login-ride{position:relative;height:34px;margin:17px 0 14px;border-bottom:3px solid #e62f3c}.login-car{position:absolute;bottom:2px;left:0;width:44px;height:25px;animation:kvr-drive 12s linear infinite}.login-car svg{width:100%;height:100%;filter:drop-shadow(0 3px 4px #07181166)}.customer-hero{position:relative;overflow:hidden;margin-bottom:18px;border:1px solid #eadc9b;border-radius:15px;background:#f8cc30;box-shadow:0 12px 30px #4c24151c}.customer-hero-art{display:grid;min-height:245px;grid-template-columns:minmax(0,1.55fr) minmax(230px,.8fr);gap:10px;padding:10px;background:#41102f}.customer-sign,.customer-workshop{position:relative;overflow:hidden;min-width:0;border-radius:9px;background:#2c1428}.customer-sign{display:grid;place-items:center}.customer-sign img{display:block;width:100%;height:100%;max-height:300px;object-fit:contain}.customer-workshop img{display:block;width:100%;height:100%;min-height:245px;object-fit:cover;object-position:center 55%;transition:transform .7s cubic-bezier(.2,.7,.2,1)}.customer-workshop:hover img{transform:scale(1.045)}.customer-workshop:after{position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#1a1717bd);content:""}.customer-workshop figcaption{position:absolute;z-index:1;right:13px;bottom:12px;left:13px;color:white;font-size:10px;font-weight:700}.customer-hero-copy{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 19px;color:#41102f}.customer-hero-copy h2{margin:3px 0;font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-.04em}.customer-hero-copy p{margin:0;color:#542b3e;font-size:10px}.customer-hero-copy .eyebrow{color:#68314b;font-size:8px}.customer-hero-copy .eyebrow:before{display:none}.customer-car-rail{position:relative;height:30px;margin:5px 18px 0;border-bottom:3px solid #df3142}.customer-moving-car{position:absolute;bottom:1px;left:0;width:48px;height:27px;animation:kvr-drive 12s linear infinite}.customer-moving-car svg{width:100%;height:100%;filter:drop-shadow(0 2px 3px #41102f38)}.owner-history-table{margin-top:15px}.owner-history-table .panel-head{padding-bottom:14px}.invoice-head{position:relative;overflow:hidden;min-height:112px;padding:20px;border:0;border-radius:8px;background:linear-gradient(115deg,#153f35,#1d5949);color:#fff}.invoice-head:after{position:absolute;right:-18px;bottom:-75px;width:210px;height:210px;border:1px solid #ffffff20;border-radius:50%;box-shadow:0 0 0 18px #ffffff08,0 0 0 38px #ffffff06;content:""}.invoice-brand{position:relative;z-index:1;color:#d9ef9c;font-family:var(--display);font-size:20px;font-weight:800}.invoice-brand small{color:#dbe7dc}.invoice-head .invoice-meta{position:relative;z-index:1;color:#eff5ef}.login-customer-only[hidden]{display:none!important}
+    @keyframes kvr-drive{from{transform:translateX(0)}to{transform:translateX(min(76vw, 880px))}}
+    @media(max-width:780px){.customer-hero-art{min-height:190px;grid-template-columns:minmax(0,1.45fr) minmax(160px,.8fr);gap:7px;padding:7px}.customer-sign img{max-height:225px}.customer-workshop img{min-height:190px}.customer-hero-copy{align-items:flex-start;flex-direction:column;gap:7px}}
+    @media(max-width:540px){.customer-hero-art{min-height:0;grid-template-columns:1fr;gap:6px;padding:6px}.customer-sign img{height:auto;max-height:none;aspect-ratio:2000/685;object-fit:contain}.customer-workshop{display:none}.customer-hero-copy{gap:7px;padding:11px 13px}.customer-hero-copy h2{font-size:15px}.customer-hero-copy p{font-size:9px}.customer-car-rail{margin-inline:13px}.customer-moving-car{animation-duration:14s}.login-gate{padding:14px}.login-card{padding:21px}}
+    @media(prefers-reduced-motion:reduce){.customer-moving-car,.login-car{animation:none;left:calc(100% - 48px)}}
+    @media print{body *{visibility:hidden!important}.invoice-print,.invoice-print *{visibility:visible!important}.invoice-print{position:absolute;inset:0;width:100%;padding:0!important}.modal-backdrop{position:static;display:block!important;padding:0;background:white}.modal-backdrop:not(.printing){display:none!important}.modal{width:100%;max-height:none;overflow:visible;box-shadow:none}.modal-head,.modal-foot{display:none!important}.invoice{padding:20px}.invoice-head{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+  </style>
+  <style>
+    body.customer-mode .sidebar{display:none}
+    body.customer-mode .main{margin-left:0}
+    body.customer-mode .content{max-width:1180px}
+    @media(max-width:780px){body.customer-mode .topbar{padding:0 16px}}
   </style>
 </head>
 <body>
+<section class="login-gate" id="login-gate" hidden>
+  <form class="login-card" id="demo-login-form">
+    <div class="login-brand"><span class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h18l-1.6-5a2 2 0 0 0-1.9-1.4H6.5A2 2 0 0 0 4.6 9L3 14Z"/><path d="M5 14v4m14-4v4M3 14h18M7 18h10"/></svg></span><div><strong>KVR CAR CARE</strong><small>WORKSHOP PORTAL</small></div></div>
+    <h1 id="login-heading">Welcome to KVR Car Care</h1><p id="login-subtitle">Sign in to follow your car service and request workshop support.</p>
+    <div class="role-pick"><button type="button" class="active" data-login-role="customer">Customer app</button><button type="button" data-login-role="owner">Owner app</button></div>
+    <div class="form-grid"><div class="form-field login-customer-only" id="login-name-wrap"><label for="login-name">Your name</label><input id="login-name" autocomplete="name" placeholder="Your full name"></div><div class="form-field"><label for="login-phone">Mobile number</label><input id="login-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" required></div><div class="form-field login-customer-only" id="login-email-wrap"><label for="login-email">Email (optional)</label><input id="login-email" type="email" autocomplete="email" placeholder="you@example.com"></div></div>
+    <button class="button button-light" id="demo-login-submit" type="submit">Continue to customer app</button>
+    <div class="login-ride" aria-hidden="true"><span class="login-car"><svg viewBox="0 0 64 36"><path d="m8 22 5-11c1-3 3-4 6-4h25c3 0 5 1 7 4l5 11v7H8v-7Z" fill="#d82439" stroke="#fff" stroke-width="2"/><path d="m18 11-3 9h15v-9Zm17 0v9h17l-4-7c-1-2-2-2-5-2Z" fill="#c6e4ed"/><circle cx="18" cy="29" r="5" fill="#1c252b" stroke="#fff" stroke-width="2"/><circle cx="47" cy="29" r="5" fill="#1c252b" stroke="#fff" stroke-width="2"/></svg></span></div>
+    <p class="demo-note">Free demo sign-in: phone numbers are not OTP-verified. Demo data stays in this browser and does not sync. Don't enter real customer information.</p>
+  </form>
+</section>
 <div class="shell">
   <aside class="sidebar">
     <a class="brand" href="#" aria-label="KVR Car Care home">
@@ -53,6 +81,7 @@
     <nav class="nav" id="owner-nav">
       <button class="active" data-page="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="11" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/></svg><span>Dashboard</span></button>
       <button data-page="requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3h8l4 4v14H4V3h4Z"/><path d="M8 3v5h8V3M8 13h8m-8 4h6"/></svg><span>Service requests</span><i class="count" id="request-count">3</i></button>
+      <button data-page="history"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8"/><path d="M3 3v5h5m4-1v5l3 2"/></svg><span>Service history</span></button>
       <button data-page="customers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="4"/><path d="M2 21v-2a7 7 0 0 1 14 0v2m2-13a4 4 0 0 1 0 8m1 2a5 5 0 0 1 3 4v1"/></svg><span>Customers</span></button>
       <button data-page="vehicles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3 14 1.8-5.2A2.7 2.7 0 0 1 7.4 7h9.2a2.7 2.7 0 0 1 2.6 1.8L21 14v5h-3v-2H6v2H3v-5Z"/><path d="M3 14h18m-14-2h1m8 0h1"/><circle cx="7" cy="14" r="1"/></svg><span>Vehicles</span></button>
       <button data-page="services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m14.7 6.3 3 3M5 19l4-1 9.7-9.7a2.1 2.1 0 0 0-3-3L6 15l-1 4Z"/><path d="m14 4 6 6M4 21h16"/></svg><span>Services &amp; prices</span></button>
@@ -71,20 +100,15 @@
       </div>
       <div class="top-actions">
         <div class="switcher" aria-label="Choose portal"><button class="active" data-view="owner">Owner app</button><button data-view="customer">Customer app</button></div>
+        <button class="button outline" id="install-app" type="button" data-action="install-app">Install app</button>
+        <button class="button outline" type="button" data-action="logout">Sign out</button>
         <button class="icon-button" id="notifications-button" aria-label="Notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12h4"/></svg><i class="notification-dot"></i></button>
       </div>
     </header>
     <div class="content">
       <div id="owner-view">
         <section class="page-section active" id="page-dashboard">
-          <section class="workshop-banner" aria-label="KVR Car Care workshop">
-            <div class="banner-visuals">
-              <div class="banner-signboard"><img src="assets/kvr-signboard.png" alt="KVR Car Care signboard with car service illustrations"></div>
-              <figure class="banner-workshop"><img src="assets/kvr-workshop.png" alt="Cars inside the KVR Car Care service workshop"><figcaption>Real cars. Reliable care. Right here in Guntur.</figcaption></figure>
-            </div>
-            <div class="banner-copy"><div><span class="banner-eyebrow">Your local automotive partner</span><h2>Welcome to KVR Car Care</h2><p>Palakaluru Road, Guntur · Mechanical, AC, denting, painting and washing.</p></div><div class="banner-actions"><a class="button button-light" target="_blank" rel="noreferrer" href="https://www.google.com/maps/dir/?api=1&amp;destination=KVR+Car+Care%2C+Palakaluru+Road%2C+Guntur%2C+Andhra+Pradesh">Get directions ↗</a><a class="button outline" href="tel:+919876543210">Call workshop</a><button class="button outline" id="install-app" type="button" data-action="install-app">Install app</button></div></div>
-          </section>
-          <div class="welcome"><div><div class="date-label" id="today-label"></div><h1>Good morning, Ravi <span aria-hidden="true">☀️</span></h1><p>Here's what's happening at your workshop today.</p></div><button class="button" data-action="new-request"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg>New service request</button></div>
+          <div class="welcome"><div><div class="date-label" id="today-label"></div><h1>Good morning, Ravi <span aria-hidden="true">☀️</span></h1><p>Here's what's happening at your workshop today.</p></div></div>
           <div class="stats">
             <article class="stat"><div class="stat-top"><span>Active jobs</span><span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></span></div><div class="stat-value" id="active-stat">8</div><div class="stat-foot"><b>3 new</b> service requests today</div></article>
             <article class="stat"><div class="stat-top"><span>Ready for pickup</span><span class="stat-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 14h18l-2-6H5l-2 6Zm1 0v5h16v-5m-13 5v-2h10v2"/></svg></span></div><div class="stat-value" id="ready-stat">2</div><div class="stat-foot">Customers have been notified</div></article>
@@ -103,9 +127,13 @@
           </div>
         </section>
         <section class="page-section" id="page-requests">
-          <div class="welcome"><div><div class="eyebrow">Workshop operations</div><h1>Service requests</h1><p>Manage incoming requests and keep every customer informed.</p></div><button class="button" data-action="new-request"><span>＋</span> New request</button></div>
+          <div class="welcome"><div><div class="eyebrow">Workshop operations</div><h1>Service requests</h1><p>Manage customer requests and keep every customer informed.</p></div></div>
           <div class="toolbar"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="request-search" placeholder="Search customer, vehicle or job..."></label><div class="toolbar-actions"><select class="select-small" id="request-filter"><option value="all">All statuses</option><option>Received</option><option>Assigned</option><option>Work in Progress</option><option>Ready for pickup</option><option>Completed</option></select></div></div>
           <section class="panel"><div class="table-wrap"><table><thead><tr><th>Job ID</th><th>Customer</th><th>Vehicle</th><th>Service requested</th><th>Assigned to</th><th>Status</th><th>Update</th></tr></thead><tbody id="requests-table"></tbody></table></div></section>
+        </section>
+        <section class="page-section" id="page-history">
+          <div class="welcome"><div><div class="eyebrow">Workshop records</div><h1>Service history</h1><p>All customer jobs, including completed services and invoice totals.</p></div></div>
+          <section class="panel"><div class="panel-head"><div><h2>All workshop services</h2><p id="owner-history-count">0 recorded jobs</p></div></div><div class="table-wrap"><table><thead><tr><th>Job / Invoice</th><th>Customer</th><th>Vehicle</th><th>Service</th><th>Status</th><th>Total</th><th>Invoice</th></tr></thead><tbody id="owner-history-table"></tbody></table></div></section>
         </section>
         <section class="page-section" id="page-customers">
           <div class="welcome"><div><div class="eyebrow">People who trust us</div><h1>Customers</h1><p>Customer details and their service history at a glance.</p></div><button class="button" data-action="add-customer">＋ Add customer</button></div>
@@ -124,9 +152,15 @@
         </section>
       </div>
       <div id="customer-view" class="customer-view" hidden>
-        <section class="customer-banner"><div><div class="eyebrow">Your trusted automotive partner</div><h1>Welcome back, Ramesh 👋</h1><p>Keep up with your vehicle service, all in one place.</p></div><button class="button button-light" data-action="customer-request">＋ Raise a service request</button></section>
-        <div class="customer-tiles"><article class="customer-tile"><span>MY VEHICLES</span><strong id="customer-vehicle-count">2 vehicles</strong></article><article class="customer-tile"><span>ACTIVE SERVICE</span><strong id="customer-active-count">1 job</strong></article><article class="customer-tile"><span>COMPLETED SERVICES</span><strong>6 services</strong></article></div>
-        <div class="customer-main-grid"><section class="panel"><div class="panel-head"><div><h2>My service requests</h2><p>Live updates from the workshop</p></div><span class="status progress">Live updates</span></div><div id="customer-requests"></div></section><div style="display:grid;align-content:start;gap:14px"><section class="panel"><div class="panel-head"><div><h2>My vehicles</h2><p>Registered vehicles</p></div><button class="link-button" data-action="customer-vehicle">＋ Add</button></div><div id="customer-vehicles"></div></section><section class="panel"><div class="panel-head"><div><h2>Need help?</h2><p>We're happy to help with your vehicle.</p></div></div><div style="padding:17px"><a class="button" style="width:100%" href="tel:+919876543210">☎ &nbsp; Call +91 9876543210</a><a class="button outline" style="width:100%;margin-top:8px" target="_blank" rel="noreferrer" href="https://www.google.com/maps/dir/?api=1&amp;destination=KVR+Car+Care%2C+Palakaluru+Road%2C+Guntur%2C+Andhra+Pradesh">↗ &nbsp; Get directions</a><a class="button soft" style="width:100%;margin-top:8px" target="_blank" rel="noreferrer" href="https://wa.me/919876543210?text=Hello%20KVR%20Car%20Care">WhatsApp workshop</a></div></section></div></div>
+        <section class="customer-hero" aria-label="KVR Car Care">
+          <div class="customer-hero-art"><div class="customer-sign"><img src="assets/kvr-signboard.png" alt="KVR Car Care signboard with engine, interior and car service illustrations"></div><figure class="customer-workshop"><img src="assets/kvr-workshop.png" alt="Cars being serviced inside KVR Car Care workshop"><figcaption>Real cars. Reliable care. Right here in Guntur.</figcaption></figure></div>
+          <div class="customer-hero-copy"><div><span class="eyebrow">Your trusted automotive partner</span><h2>Welcome to KVR Car Care</h2><p>Palakaluru Road, Guntur · Mechanical, AC, denting, painting and washing.</p></div><a class="button button-light" target="_blank" rel="noreferrer" href="https://www.google.com/maps/dir/?api=1&amp;destination=KVR+Car+Care%2C+Palakaluru+Road%2C+Guntur%2C+Andhra+Pradesh">Get directions ↗</a></div>
+          <div class="customer-car-rail" aria-label="A car moving along the road"><span class="customer-moving-car" aria-hidden="true"><svg viewBox="0 0 64 36"><path d="m8 22 5-11c1-3 3-4 6-4h25c3 0 5 1 7 4l5 11v7H8v-7Z" fill="#d82439" stroke="#fff" stroke-width="2"/><path d="m18 11-3 9h15v-9Zm17 0v9h17l-4-7c-1-2-2-2-5-2Z" fill="#c6e4ed"/><circle cx="18" cy="29" r="5" fill="#1c252b" stroke="#fff" stroke-width="2"/><circle cx="47" cy="29" r="5" fill="#1c252b" stroke="#fff" stroke-width="2"/></svg></span></div>
+        </section>
+        <section class="customer-banner"><div><div class="eyebrow">Your service at a glance</div><h1 id="customer-welcome">Welcome back 👋</h1><p>Keep up with your vehicle service, all in one place.</p></div><button class="button" data-action="customer-request">＋ Raise a service request</button></section>
+        <div class="customer-tiles"><article class="customer-tile"><span>MY VEHICLES</span><strong id="customer-vehicle-count">0 vehicles</strong></article><article class="customer-tile"><span>ACTIVE SERVICE</span><strong id="customer-active-count">0 jobs</strong></article><article class="customer-tile"><span>COMPLETED SERVICES</span><strong id="customer-completed-count">0 services</strong></article></div>
+        <div class="customer-main-grid"><section class="panel"><div class="panel-head"><div><h2>My service requests</h2><p>Live updates from the workshop</p></div><span class="status progress">Live updates</span></div><div id="customer-requests"></div></section><div style="display:grid;align-content:start;gap:14px"><section class="panel"><div class="panel-head"><div><h2>My vehicles</h2><p>Registered vehicles</p></div><button class="link-button" data-action="customer-vehicle">＋ Add</button></div><div id="customer-vehicles"></div></section><section class="panel"><div class="panel-head"><div><h2>Need help?</h2><p>We're happy to help with your vehicle.</p></div></div><div style="padding:17px"><a class="button" style="width:100%" href="tel:+919876543210">☎ &nbsp; Call workshop</a><a class="button outline" style="width:100%;margin-top:8px" target="_blank" rel="noreferrer" href="https://www.google.com/maps/dir/?api=1&amp;destination=KVR+Car+Care%2C+Palakaluru+Road%2C+Guntur%2C+Andhra+Pradesh">↗ &nbsp; Get directions</a><a class="button soft" style="width:100%;margin-top:8px" target="_blank" rel="noreferrer" href="https://wa.me/917093441878?text=Hello%20KVR%20Car%20Care">WhatsApp workshop · +91 70934 41878</a></div></section></div></div>
+        <section class="panel owner-history-table"><div class="panel-head"><div><h2>My service history</h2><p>Completed services and invoices</p></div></div><div class="table-wrap"><table><thead><tr><th>Invoice</th><th>Vehicle</th><th>Service</th><th>Date</th><th>Total</th><th>Download</th></tr></thead><tbody id="customer-history"></tbody></table></div></section>
       </div>
     </div>
   </main>
@@ -164,6 +198,61 @@
   let state;
   try { state=JSON.parse(localStorage.getItem("kvr-car-care-state"))||seed; } catch(error) { console.error("Could not read saved workshop data.",error); state=seed; }
   const persist=()=>{try{localStorage.setItem("kvr-car-care-state",JSON.stringify(state));}catch(error){console.error("Could not save workshop data.",error);toast("Changes couldn't be saved in this browser.");}};
+  let signedInUser=null;
+  const appMode=window.kvrAppMode;
+  const demoUserKey=`kvr-car-care-demo-user-${appMode||"default"}`;
+  const ownerNumbers=new Set(["7093441878","7036705454"]);
+  const digits=value=>String(value||"").replace(/\D/g,"").slice(-10);
+  const whatsappDigits=value=>{const number=String(value||"").replace(/\D/g,"");return number.length===10?`91${number}`:number;};
+  const customerForUser=()=>state.customers.find(c=>digits(c.phone)===digits(signedInUser?.phone));
+  function showPortal(role){
+    const customer=role==="customer";
+    $("#owner-view").hidden=customer;
+    $("#customer-view").hidden=!customer;
+    document.body.classList.toggle("customer-mode",customer);
+    $(".switcher").hidden=appMode==="owner"||appMode==="customer";
+    $("#owner-nav").hidden=customer;
+    $("#breadcrumb-current").textContent=customer?"Customer portal":"Dashboard";
+    $$(".switcher [data-view]").forEach(button=>button.classList.toggle("active",button.dataset.view===role));
+    if(customer)renderCustomerPortal();
+  }
+  function enterApp(user){
+    signedInUser=user;
+    localStorage.setItem(demoUserKey,JSON.stringify(user));
+    $("#login-gate").hidden=true;
+    showPortal(user.role);
+  }
+  function setLoginRole(role){
+    if(appMode==="owner"||appMode==="customer")role=appMode;
+    $("#demo-login-form").dataset.role=role;
+    $$(".role-pick [data-login-role]").forEach(button=>button.classList.toggle("active",button.dataset.loginRole===role));
+    const customer=role==="customer";
+    $("#login-name-wrap").hidden=!customer;
+    $("#login-email-wrap").hidden=!customer;
+    $("#login-heading").textContent=customer?"Welcome to KVR Car Care":"Owner sign in";
+    $("#login-subtitle").textContent=customer?"Sign in to follow your car service and request workshop support.":"Sign in to manage workshop jobs and service history.";
+    $("#demo-login-submit").textContent=customer?"Continue to customer app":"Continue to owner app";
+  }
+  function signIn(event){
+    event.preventDefault();
+    const role=$("#demo-login-form").dataset.role,phone=$("#login-phone").value.trim(),phoneDigits=digits(phone);
+    if(phoneDigits.length!==10){$("#login-phone").setCustomValidity("Enter a valid 10-digit mobile number.");$("#login-phone").reportValidity();return;}
+    $("#login-phone").setCustomValidity("");
+    if(role==="owner"){
+      if(!ownerNumbers.has(phoneDigits)){toast("That number is not enabled for the owner demo.");return;}
+      enterApp({role,name:"KVR Owner",phone});
+      return;
+    }
+    const name=$("#login-name").value.trim(),email=$("#login-email").value.trim();
+    let customer=state.customers.find(c=>digits(c.phone)===phoneDigits);
+    if(!name&&!customer){$("#login-name").setCustomValidity("Enter your name to register.");$("#login-name").reportValidity();return;}
+    $("#login-name").setCustomValidity("");
+    if(!customer){customer={name,phone,email,vehicles:[]};state.customers.unshift(customer);}
+    else{if(name)customer.name=name;customer.phone=phone;if(email)customer.email=email;}
+    persist();
+    enterApp({role,name:customer.name,phone:customer.phone});
+    render();
+  }
   const esc=(v)=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const money=(n)=>"₹"+Number(n||0).toLocaleString("en-IN");
   const initials=(n)=>String(n||"?").split(/\s+/).slice(0,2).map(p=>p[0]||"").join("").toUpperCase();
@@ -222,7 +311,25 @@
     $("#customer-requests").innerHTML=jobs.length?jobs.map(j=>{const steps=["Received","Assigned","Work in Progress","Ready for pickup","Completed"],ix=steps.indexOf(j.status);return `<article class="request-card"><div class="request-head"><strong>${esc(j.service)} <span class="muted" style="font-weight:500">· ${esc(j.vehicle)}</span></strong>${statusTag(j.status)}</div><p>${esc(j.remarks||j.description)}</p><div class="timeline">${steps.map((s,i)=>`${i?'<span class="timeline-line"></span>':""}<span class="timeline-step ${i<ix?"done":i===ix?"current":""}"><i>${i<ix?"✓":i+1}</i>${s==="Work in Progress"?"In progress":s==="Ready for pickup"?"Ready":s}</span>`).join("")}</div>${j.photos?.length?`<div class="photo-grid">${j.photos.map(src=>`<img src="${src}" alt="Workshop service progress photo">`).join("")}</div>`:""}<div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:10px">${j.status==="Ready for pickup"||j.status==="Completed"?`<button class="button soft" data-action="invoice" data-job="${safeAttr(j.id)}">Download invoice · ${money(total(j))}</button>`:""}<a class="button outline" target="_blank" rel="noreferrer" href="https://wa.me/919876543210?text=${encodeURIComponent("Hello KVR Car Care, regarding "+j.id)}">Contact workshop</a></div></article>`}).join(""):`<div class="empty">No service requests yet. Raise a request to get started.</div>`;
     $("#customer-vehicles").innerHTML=(customer?.vehicles||[]).map(v=>{const p=v.split(" — ");return `<div class="vehicle-mini"><span class="car-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3 14 1.8-5.2A2.7 2.7 0 0 1 7.4 7h9.2a2.7 2.7 0 0 1 2.6 1.8L21 14v5h-3v-2H6v2H3v-5Z"/></svg></span><div><strong>${esc(p[0])}</strong><small>${esc(p[1]||"Registration pending")}</small></div></div>`}).join("")||`<div class="empty">Add your first vehicle.</div>`;
   }
-  function gotoPage(page){$$(".page-section").forEach(s=>s.classList.toggle("active",s.id==="page-"+page));$$("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));$("#breadcrumb-current").textContent=({dashboard:"Dashboard",requests:"Service requests",customers:"Customers",vehicles:"Vehicles",services:"Services & prices",reports:"Reports & analytics"})[page]||"Dashboard";window.scrollTo({top:0,behavior:"smooth"});}
+  function renderCustomerPortal(){
+    const customer=customerForUser(),customerName=customer?.name||signedInUser?.name||"Customer";
+    const jobs=state.jobs.filter(j=>digits(j.phone)===digits(signedInUser?.phone));
+    const active=jobs.filter(j=>!["Completed","Ready for pickup"].includes(j.status)).length;
+    const complete=jobs.filter(j=>["Completed","Ready for pickup"].includes(j.status)).length;
+    $("#customer-welcome").textContent=`Welcome back, ${customerName} 👋`;
+    $("#customer-active-count").textContent=`${active} active job${active===1?"":"s"}`;
+    $("#customer-completed-count").textContent=`${complete} service${complete===1?"":"s"}`;
+    $("#customer-vehicle-count").textContent=`${customer?.vehicles.length||0} vehicle${customer?.vehicles.length===1?"":"s"}`;
+    $("#customer-requests").innerHTML=jobs.length?jobs.map(j=>{const steps=["Received","Assigned","Work in Progress","Ready for pickup","Completed"],ix=steps.indexOf(j.status);return `<article class="request-card"><div class="request-head"><strong>${esc(j.service)} <span class="muted" style="font-weight:500">· ${esc(j.vehicle)}</span></strong>${statusTag(j.status)}</div><p>${esc(j.remarks||j.description)}</p><div class="timeline">${steps.map((s,i)=>`${i?'<span class="timeline-line"></span>':""}<span class="timeline-step ${i<ix?"done":i===ix?"current":""}"><i>${i<ix?"✓":i+1}</i>${s==="Work in Progress"?"In progress":s==="Ready for pickup"?"Ready":s}</span>`).join("")}</div>${j.photos?.length?`<div class="photo-grid">${j.photos.map(src=>`<img src="${src}" alt="Workshop service progress photo">`).join("")}</div>`:""}<div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:10px">${j.status==="Ready for pickup"||j.status==="Completed"?`<button class="button soft" data-action="invoice" data-job="${safeAttr(j.id)}">Download invoice · ${money(total(j))}</button>`:""}<a class="button outline" target="_blank" rel="noreferrer" href="https://wa.me/917093441878?text=${encodeURIComponent("Hello KVR Car Care, regarding "+j.id)}">Contact workshop</a></div></article>`}).join(""):`<div class="empty">No service requests yet. Raise a request to get started.</div>`;
+    $("#customer-vehicles").innerHTML=(customer?.vehicles||[]).map(v=>{const p=v.split(" — ");return `<div class="vehicle-mini"><span class="car-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3 14 1.8-5.2A2.7 2.7 0 0 1 7.4 7h9.2a2.7 2.7 0 0 1 2.6 1.8L21 14v5h-3v-2H6v2H3v-5Z"/></svg></span><div><strong>${esc(p[0])}</strong><small>${esc(p[1]||"Registration pending")}</small></div></div>`}).join("")||`<div class="empty">Add your first vehicle.</div>`;
+    const completed=jobs.filter(j=>["Completed","Ready for pickup"].includes(j.status));
+    $("#customer-history").innerHTML=completed.length?completed.map(j=>`<tr><td>${esc(j.invoiceId||j.id)}</td><td>${esc(j.vehicle)}</td><td>${esc(j.service)}</td><td>${esc(j.invoiceDate||j.created)}</td><td>${money(total(j))}</td><td><button class="job-action" data-action="invoice" data-job="${safeAttr(j.id)}">Download PDF</button></td></tr>`).join(""):`<tr><td colspan="6"><div class="empty">Completed services and invoices will appear here.</div></td></tr>`;
+  }
+  function renderHistory(){
+    $("#owner-history-count").textContent=`${state.jobs.length} recorded job${state.jobs.length===1?"":"s"}`;
+    $("#owner-history-table").innerHTML=state.jobs.length?state.jobs.map(j=>`<tr><td>${esc(j.invoiceId||j.id)}</td><td>${esc(j.customer)}<small style="display:block;color:var(--muted);margin-top:3px">${esc(j.phone)}</small></td><td>${esc(j.vehicle)}<small style="display:block;color:var(--muted);margin-top:3px">${esc(j.reg)}</small></td><td>${esc(j.service)}</td><td>${statusTag(j.status)}</td><td>${money(total(j))}</td><td><button class="job-action" data-action="invoice" data-job="${safeAttr(j.id)}">Invoice</button></td></tr>`).join(""):`<tr><td colspan="7"><div class="empty">No service history yet.</div></td></tr>`;
+  }
+  function gotoPage(page){if(signedInUser?.role!=="owner")return;$$(".page-section").forEach(s=>s.classList.toggle("active",s.id==="page-"+page));$$("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));$("#breadcrumb-current").textContent=({dashboard:"Dashboard",requests:"Service requests",history:"Service history",customers:"Customers",vehicles:"Vehicles",services:"Services & prices",reports:"Reports & analytics"})[page]||"Dashboard";window.scrollTo({top:0,behavior:"smooth"});}
   function showModal(title,body,buttons){$("#modal-title").textContent=title;$("#modal-body").innerHTML=body;$("#modal-foot").innerHTML=buttons;$("#modal-backdrop").classList.add("open");}
   function closeModal(){$("#modal-backdrop").classList.remove("open");}
   function renderRequestForm(customerMode=false){const customerOptions=state.customers.map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join("");const catOptions=Object.keys(services).map(c=>`<option>${esc(c)}</option>`).join("");showModal(customerMode?"Raise a service request":"Create service request",`<form id="request-form" class="form-grid"><div class="form-field"><label for="req-customer">Customer</label><select required name="customer" id="req-customer">${customerMode?'<option>Ramesh Kumar</option>':`<option value="">Select customer</option>${customerOptions}`}</select></div><div class="form-field"><label for="req-phone">Phone number</label><input id="req-phone" name="phone" placeholder="+91 98765 43210" required></div><div class="form-field"><label for="req-vehicle">Vehicle</label><input id="req-vehicle" name="vehicle" placeholder="e.g. Hyundai i20" required></div><div class="form-field"><label for="req-reg">Registration number</label><input id="req-reg" name="reg" placeholder="AP 07 AB 1234" required></div><div class="form-field"><label for="req-category">Service category</label><select id="req-category" name="category" required><option value="">Choose category</option>${catOptions}</select></div><div class="form-field"><label for="req-service">Service</label><select id="req-service" name="service" required><option value="">Choose service</option></select></div><div class="form-field full"><label for="req-description">Describe the issue</label><textarea id="req-description" name="description" placeholder="Tell us what happened and any symptoms..." required></textarea></div></form>`, `<button class="button outline" data-close>Cancel</button><button class="button" data-action="submit-request">Submit request</button>`);$("#req-customer").addEventListener("change",e=>{const c=state.customers.find(x=>x.name===e.target.value);if(c){$("#req-phone").value=c.phone;const first=c.vehicles[0]?.split(" — ");if(first){$("#req-vehicle").value=first[0];$("#req-reg").value=first[1]||"";}}});$("#req-category").addEventListener("change",e=>{$("#req-service").innerHTML='<option value="">Choose service</option>'+services[e.target.value].map(([n,p])=>`<option value="${esc(n)}">${esc(n)} — ${money(p)}</option>`).join("");});if(customerMode){$("#req-phone").value=state.customers.find(c=>c.name==="Ramesh Kumar")?.phone||"";$("#req-vehicle").value="Hyundai i20";$("#req-reg").value="AP 07 CD 1234";}}
@@ -243,6 +350,93 @@
   document.addEventListener("change",e=>{if(e.target.id==="request-filter")renderJobs();if(e.target.matches('[data-part]')){const form=$("#job-form");if(form){const parts=$$(".parts-row",form).reduce((s,r)=>s+(Number($('[data-part="qty"]',r).value)||1)*(Number($('[data-part="amount"]',r).value)||0),0);$("#job-total").textContent=money(parts+(Number($("#job-labour").value)||0));}}});
   $("#modal-backdrop").addEventListener("click",e=>{if(e.target.id==="modal-backdrop")closeModal();});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();if(e.key==="Enter"&&e.target.closest("#request-form")&&e.target.tagName!=="TEXTAREA")e.preventDefault();});
+  renderRequestForm=function(customerMode=false){
+    customerMode=customerMode||signedInUser?.role==="customer";
+    const activeCustomer=customerMode?customerForUser():null;
+    const options=(customerMode?(activeCustomer?[activeCustomer]:[]):state.customers).map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join("");
+    const categories=Object.keys(services).map(category=>`<option>${esc(category)}</option>`).join("");
+    showModal("Raise a service request",`<form id="request-form" class="form-grid"><div class="form-field"><label for="req-customer">Customer</label><select required name="customer" id="req-customer">${customerMode?options:`<option value="">Select customer</option>${options}`}</select></div><div class="form-field"><label for="req-phone">Phone number</label><input id="req-phone" name="phone" required></div><div class="form-field"><label for="req-vehicle">Vehicle</label><input id="req-vehicle" name="vehicle" placeholder="e.g. Hyundai i20" required></div><div class="form-field"><label for="req-reg">Registration number</label><input id="req-reg" name="reg" placeholder="AP 07 AB 1234" required></div><div class="form-field"><label for="req-category">Service category</label><select id="req-category" name="category" required><option value="">Choose category</option>${categories}</select></div><div class="form-field"><label for="req-service">Service</label><select id="req-service" name="service" required><option value="">Choose service</option></select></div><div class="form-field full"><label for="req-description">Describe the issue</label><textarea id="req-description" name="description" placeholder="Tell us what happened and any symptoms..." required></textarea></div></form>`,`<button class="button outline" data-close>Cancel</button><button class="button" data-action="submit-request">Submit request</button>`);
+    $("#req-customer").addEventListener("change",event=>{const customer=state.customers.find(item=>item.name===event.target.value);if(!customer)return;$("#req-phone").value=customer.phone;const vehicle=customer.vehicles[0]?.split(" — ");if(vehicle){$("#req-vehicle").value=vehicle[0];$("#req-reg").value=vehicle[1]||"";}});
+    $("#req-category").addEventListener("change",event=>{$("#req-service").innerHTML='<option value="">Choose service</option>'+(services[event.target.value]||[]).map(([name,price])=>`<option value="${esc(name)}">${esc(name)} — ${money(price)}</option>`).join("");});
+    if(customerMode&&activeCustomer){$("#req-customer").value=activeCustomer.name;$("#req-customer").disabled=true;$("#req-phone").value=activeCustomer.phone;const vehicle=activeCustomer.vehicles[0]?.split(" — ");if(vehicle){$("#req-vehicle").value=vehicle[0];$("#req-reg").value=vehicle[1]||"";}}
+    if(!customerMode)$("#req-customer").addEventListener("change",event=>{const customer=state.customers.find(item=>item.name===event.target.value);if(customer){$("#req-phone").value=customer.phone;const vehicle=customer.vehicles[0]?.split(" — ");if(vehicle){$("#req-vehicle").value=vehicle[0];$("#req-reg").value=vehicle[1]||"";}}});
+  };
+  submitRequest=function(){
+    if(signedInUser?.role!=="customer"){toast("Only a signed-in customer can submit a service request.");return;}
+    const form=$("#request-form");if(!form.reportValidity())return;
+    const data=new FormData(form),customer=customerForUser();
+    if(!customer){toast("Your customer profile could not be found. Please sign in again.");return;}
+    const vehicle=String(data.get("vehicle")).trim(),reg=String(data.get("reg")).trim();
+    if(!customer.vehicles.some(item=>item.toLowerCase()===`${vehicle} — ${reg}`.toLowerCase()))customer.vehicles.unshift(`${vehicle} — ${reg}`);
+    const number=Math.max(15,...state.jobs.map(job=>Number(job.id.split("-").pop())||0))+1;
+    state.jobs.unshift({id:`KVR-${new Date().getFullYear()}-${String(number).padStart(3,"0")}`,customer:customer.name,phone:customer.phone,vehicle,reg,service:String(data.get("service")),category:String(data.get("category")),description:String(data.get("description")).trim(),status:"Received",technician:"Unassigned",remarks:"Request received. Awaiting assignment.",photos:[],parts:[],labour:0,created:new Date().toLocaleString("en-IN")});
+    persist();render();closeModal();toast("Service request submitted to KVR Car Care.");
+  };
+  invoiceMarkup=function(job){
+    const invoiceNo=job.invoiceId||job.id,invoiceDate=job.invoiceDate||new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
+    const items=[...(job.parts||[]),...(Number(job.labour)>0?[{name:"Labour Charge",qty:1,amount:Number(job.labour)}]:[])];
+    return `<div class="invoice invoice-print"><div class="invoice-head"><div class="invoice-brand">KVR CAR CARE<small>Palakaluru Road, Guntur, Andhra Pradesh<br>+91 9876543210</small></div><div class="invoice-meta"><strong>TAX INVOICE</strong><br>Invoice No: ${esc(invoiceNo)}<br>Date: ${esc(invoiceDate)}</div></div><div class="invoice-customer"><div><span>Bill to</span><strong>${esc(job.customer)}</strong><div class="muted" style="font-size:10px;margin-top:4px">${esc(job.phone)}</div></div><div><span>Vehicle</span><strong>${esc(job.vehicle)}</strong><div class="muted" style="font-size:10px;margin-top:4px">${esc(job.reg)}</div></div></div><table><thead><tr><th>S.No</th><th>Particulars</th><th>Qty</th><th style="text-align:right">Amount</th></tr></thead><tbody>${items.length?items.map((item,index)=>`<tr><td>${index+1}</td><td>${esc(item.name)}</td><td>${Number(item.qty||1)}</td><td style="text-align:right">${money(Number(item.amount)*Number(item.qty||1))}</td></tr>`).join(""):`<tr><td>1</td><td>${esc(job.service)}</td><td>1</td><td style="text-align:right">${money(total(job))}</td></tr>`}</tbody></table><div class="invoice-total"><span>Total payable</span><strong>${money(total(job))}</strong></div><div class="invoice-thanks">Thank you for choosing KVR Car Care. Visit again!</div></div>`;
+  };
+  saveJob=function(id){
+    const job=state.jobs.find(item=>item.id===id),form=$("#job-form");if(!job||!form)return;
+    const oldStatus=job.status,data=new FormData(form);
+    job.status=String(data.get("status"));job.technician=String(data.get("technician")||"").trim()||"Unassigned";job.remarks=String(data.get("remarks")||"").trim()||job.remarks;job.labour=Number(data.get("labour"))||0;
+    job.parts=$$(".parts-row",form).map(row=>({name:$('[data-part="name"]',row).value.trim(),qty:Number($('[data-part="qty"]',row).value)||1,amount:Number($('[data-part="amount"]',row).value)||0})).filter(part=>part.name);
+    const becameComplete=job.status==="Completed"&&oldStatus!=="Completed";
+    if(becameComplete){job.invoiceId=`KVR-INV-${new Date().getFullYear()}-${job.id.split("-").pop()}`;job.invoiceDate=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});}
+    persist();render();closeModal();
+    if(becameComplete){
+      const lines=[...(job.parts||[]).map(part=>`${part.name} x${part.qty}: ${money(part.amount*part.qty)}`),...(job.labour>0?[`Labour charge: ${money(job.labour)}`]:[])];
+      const message=`Hello ${job.customer}, your vehicle service at KVR Car Care is completed. Invoice ${job.invoiceId} (${job.invoiceDate}).${lines.length?` Details: ${lines.join("; ")}.`:""} Total: ${money(total(job))}. Please download the invoice from your customer portal.`;
+      const target=window.open(`https://wa.me/${whatsappDigits(job.phone)}?text=${encodeURIComponent(message)}`,"_blank");
+      if(target)target.opener=null;
+      toast("Service completed; review and send the invoice message in WhatsApp.");
+    }else{
+      const files=$("#job-photo")?.files;
+      if(files?.length){
+        let remaining=Math.min(files.length,4),failed=false;
+        Array.from(files).slice(0,4).forEach(file=>{const reader=new FileReader();reader.onload=()=>{job.photos.push(reader.result);remaining--;if(remaining===0){persist();render();toast(failed?"Job saved; one or more photos could not be added.":"Progress update and photos saved.");}};reader.onerror=()=>{console.error("Photo upload could not be read.");failed=true;remaining--;if(remaining===0){persist();render();toast("Job saved; one or more photos could not be added.");}};reader.readAsDataURL(file);});
+        return;
+      }
+      toast("Job status and customer update saved.");
+    }
+    const files=$("#job-photo")?.files;
+    if(files?.length){let remaining=Math.min(files.length,4);Array.from(files).slice(0,4).forEach(file=>{const reader=new FileReader();reader.onload=()=>{job.photos.push(reader.result);remaining--;if(remaining===0){persist();render();}};reader.onerror=()=>{console.error("Photo upload could not be read.");remaining--;if(remaining===0)toast("Job completed; a photo could not be added.");};reader.readAsDataURL(file);});}
+  };
+  addVehicle=function(){
+    if(signedInUser?.role!=="customer"){showModal("Add a vehicle",`<form id="add-vehicle-form" class="form-grid"><div class="form-field full"><label>Vehicle owner</label><select name="customer">${state.customers.map(c=>`<option>${esc(c.name)}</option>`).join("")}</select></div><div class="form-field"><label>Make and model</label><input name="vehicle" placeholder="e.g. Hyundai i20" required></div><div class="form-field"><label>Registration number</label><input name="reg" placeholder="AP 07 AB 1234" required></div></form>`,`<button class="button outline" data-close>Cancel</button><button class="button" data-action="save-vehicle">Add vehicle</button>`);return;}
+    showModal("Add a vehicle",`<form id="add-vehicle-form" class="form-grid"><div class="form-field"><label>Make and model</label><input name="vehicle" placeholder="e.g. Hyundai i20" required></div><div class="form-field"><label>Registration number</label><input name="reg" placeholder="AP 07 AB 1234" required></div></form>`,`<button class="button outline" data-close>Cancel</button><button class="button" data-action="save-customer-vehicle">Add vehicle</button>`);
+  };
+  const originalHandleAction=handleAction;
+  handleAction=function(button){
+    const action=button.dataset.action;
+    if(action==="logout"){signedInUser=null;localStorage.removeItem(demoUserKey);$("#login-gate").hidden=false;setLoginRole(appMode==="owner"?"owner":"customer");return;}
+    if(action==="new-request"){toast("Only customers can submit service requests.");return;}
+    if(action==="customer-request"&&signedInUser?.role!=="customer"){toast("Sign in to the customer app to submit a request.");return;}
+    if(action==="customer-vehicle"&&signedInUser?.role!=="customer"){toast("Sign in to the customer app to add your vehicle.");return;}
+    if(action==="save-customer-vehicle"){
+      const form=$("#add-vehicle-form");if(!form.reportValidity())return;
+      const customer=customerForUser(),data=new FormData(form);
+      if(customer)customer.vehicles.push(`${String(data.get("vehicle")).trim()} — ${String(data.get("reg")).trim()}`);
+      persist();render();closeModal();toast("Vehicle added successfully.");return;
+    }
+    originalHandleAction(button);
+  };
+  const originalRender=render;
+  render=function(){originalRender();renderHistory();};
+  $$(".role-pick [data-login-role]").forEach(button=>button.addEventListener("click",()=>setLoginRole(button.dataset.loginRole)));
+  $("#demo-login-form").addEventListener("submit",signIn);
+  $("#login-phone").addEventListener("input",event=>event.target.setCustomValidity(""));
+  $("#login-name").addEventListener("input",event=>event.target.setCustomValidity(""));
+  document.addEventListener("click",event=>{const viewButton=event.target.closest("[data-view]");if(viewButton&&signedInUser&&viewButton.dataset.view!==signedInUser.role)showPortal(signedInUser.role);});
+  const userFromStorage=()=>{try{return JSON.parse(localStorage.getItem(demoUserKey)||"null");}catch(error){console.error("Could not read the demo sign-in.",error);return null;}};
+  setLoginRole(appMode==="owner"?"owner":"customer");
+  if(appMode==="owner"||appMode==="customer")$$(".role-pick [data-login-role]").forEach(button=>button.hidden=button.dataset.loginRole!==appMode);
+  const savedUser=userFromStorage();
+  if(savedUser&&["owner","customer"].includes(savedUser.role)&&(!appMode||appMode===savedUser.role)){
+    if(savedUser.role!=="owner"||ownerNumbers.has(digits(savedUser.phone))){signedInUser=savedUser;$("#login-gate").hidden=true;showPortal(savedUser.role);}
+    else $("#login-gate").hidden=false;
+  }else $("#login-gate").hidden=false;
   const today=new Date();$("#today-label").textContent=today.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});render();
   if("serviceWorker" in navigator&&window.isSecureContext)navigator.serviceWorker.register("./service-worker.js").catch(error=>console.error("The app could not enable offline support.",error));
 })();
