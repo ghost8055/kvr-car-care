@@ -1,0 +1,32 @@
+{
+  "id": "./",
+  "name": "KVR Car Care",
+  "short_name": "KVR Car Care",
+  "description": "Workshop service management and vehicle care from KVR Car Care, Guntur.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f6f2",
+  "theme_color": "#153f35",
+  "icons": [
+    {
+      "src": "assets/kvr-app-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/kvr-app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/kvr-app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
