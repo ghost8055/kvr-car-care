@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#d8dcf3"/><stop offset="1" stop-color="#f3f1e8"/></linearGradient>
+    <linearGradient id="body" x2="0" y2="1"><stop stop-color="#cfd7dc"/><stop offset="1" stop-color="#798991"/></linearGradient>
+    <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#a8b0ad"/><stop offset="1" stop-color="#48534f"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <path d="M0 470h1200v250H0z" fill="url(#floor)"/>
+  <path d="M110 105h980v285H110z" fill="#fafaf5" opacity=".85"/>
+  <path d="M145 132h280v220H145zm315 0h280v220H460zm315 0h280v220H775z" fill="#d6e0e5"/>
+  <path d="M0 430h1200" stroke="#fff" stroke-width="12" opacity=".72"/>
+  <ellipse cx="610" cy="572" rx="420" ry="40" fill="#17231f" opacity=".26"/>
+  <path d="m205 490 61-125c20-41 60-64 107-64h359c53 0 96 24 124 67l81 122 58 22v105H198v-98z" fill="url(#body)" stroke="#56656b" stroke-width="12" stroke-linejoin="round"/>
+  <path d="m376 326-75 158h233V326zm267 0v158h280l-70-106c-19-30-41-43-76-52z" fill="#e8f3f3" stroke="#56656b" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M210 512h770" stroke="#f8ffff" stroke-width="10" opacity=".85"/>
+  <circle cx="355" cy="601" r="68" fill="#172126"/><circle cx="355" cy="601" r="32" fill="#c5cbca"/>
+  <circle cx="823" cy="601" r="68" fill="#172126"/><circle cx="823" cy="601" r="32" fill="#c5cbca"/>
+  <path d="M200 495h77m693 0h76" stroke="#fff1bc" stroke-width="17" stroke-linecap="round"/>
+  <text x="600" y="78" text-anchor="middle" fill="#273c4d" font-family="Arial,sans-serif" font-size="32" font-weight="700" letter-spacing="8">SERVICE YOU CAN TRUST</text>
+</svg>

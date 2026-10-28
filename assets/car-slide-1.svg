@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#bde4ed"/><stop offset="1" stop-color="#eff4eb"/></linearGradient>
+    <linearGradient id="body" x2="0" y2="1"><stop stop-color="#66b6d2"/><stop offset="1" stop-color="#23728d"/></linearGradient>
+    <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#9ca9a2"/><stop offset="1" stop-color="#445650"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <path d="M0 470h1200v250H0z" fill="url(#floor)"/>
+  <path d="M110 100h980v300H110z" fill="#f7faf4" opacity=".8"/>
+  <path d="M145 125h280v230H145zm315 0h280v230H460zm315 0h280v230H775z" fill="#d3e6e5"/>
+  <path d="M0 430h1200" stroke="#fff" stroke-width="12" opacity=".75"/>
+  <ellipse cx="610" cy="570" rx="415" ry="38" fill="#17231f" opacity=".25"/>
+  <path d="m220 490 60-120c20-40 60-65 105-65h340c54 0 99 24 126 68l77 117 61 19v99H210v-83z" fill="url(#body)" stroke="#174e62" stroke-width="12" stroke-linejoin="round"/>
+  <path d="m375 348-74 142h231V348zm269 0v142h268l-66-103c-18-27-39-39-72-39z" fill="#d8eff1" stroke="#174e62" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M226 520h756" stroke="#d7f0f3" stroke-width="10" opacity=".85"/>
+  <circle cx="360" cy="594" r="67" fill="#182329"/><circle cx="360" cy="594" r="31" fill="#b9c9c6"/>
+  <circle cx="819" cy="594" r="67" fill="#182329"/><circle cx="819" cy="594" r="31" fill="#b9c9c6"/>
+  <path d="M228 492h80m670 0h68" stroke="#fff2b0" stroke-width="17" stroke-linecap="round"/>
+  <text x="600" y="80" text-anchor="middle" fill="#153f35" font-family="Arial,sans-serif" font-size="32" font-weight="700" letter-spacing="8">KVR CAR CARE</text>
+</svg>

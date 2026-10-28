@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#f8d3c7"/><stop offset="1" stop-color="#f6eee1"/></linearGradient>
+    <linearGradient id="body" x2="0" y2="1"><stop stop-color="#e84b4c"/><stop offset="1" stop-color="#a91f32"/></linearGradient>
+    <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#aaa59c"/><stop offset="1" stop-color="#4f514c"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <path d="M0 470h1200v250H0z" fill="url(#floor)"/>
+  <path d="M90 105h1020v290H90z" fill="#fff9f0" opacity=".83"/>
+  <path d="M125 130h300v220H125zm330 0h300v220H455zm330 0h300v220H785z" fill="#e9d8cd"/>
+  <path d="M0 430h1200" stroke="#fff" stroke-width="12" opacity=".7"/>
+  <ellipse cx="610" cy="574" rx="430" ry="40" fill="#17231f" opacity=".27"/>
+  <path d="m180 482 65-143c23-50 67-77 122-77h422c51 0 94 24 123 67l99 148 53 24v105H164V510z" fill="url(#body)" stroke="#761b2a" stroke-width="13" stroke-linejoin="round"/>
+  <path d="m384 310-87 181h238V310zm276 0v181h295l-77-116c-19-29-43-42-78-42z" fill="#e6f0ed" stroke="#761b2a" stroke-width="11" stroke-linejoin="round"/>
+  <path d="M188 510h842" stroke="#ffb5a2" stroke-width="11" opacity=".8"/>
+  <circle cx="350" cy="604" r="72" fill="#172126"/><circle cx="350" cy="604" r="34" fill="#c6c7bd"/>
+  <circle cx="844" cy="604" r="72" fill="#172126"/><circle cx="844" cy="604" r="34" fill="#c6c7bd"/>
+  <path d="M174 492h85m802 0h71" stroke="#fff0b0" stroke-width="18" stroke-linecap="round"/>
+  <text x="600" y="78" text-anchor="middle" fill="#542435" font-family="Arial,sans-serif" font-size="32" font-weight="700" letter-spacing="8">CARE FOR EVERY JOURNEY</text>
+</svg>
