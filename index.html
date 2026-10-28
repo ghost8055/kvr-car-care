@@ -53,10 +53,74 @@
     @media print{body *{visibility:hidden!important}.invoice-print,.invoice-print *{visibility:visible!important}.invoice-print{position:absolute;inset:0;width:100%;padding:0!important}.modal-backdrop{position:static;display:block!important;padding:0;background:white}.modal-backdrop:not(.printing){display:none!important}.modal{width:100%;max-height:none;overflow:visible;box-shadow:none}.modal-head,.modal-foot{display:none!important}.invoice{padding:20px}.invoice-head{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
   </style>
   <style>
-    body.customer-mode .sidebar{display:none}
-    body.customer-mode .main{margin-left:0}
-    body.customer-mode .content{max-width:1180px}
-    @media(max-width:780px){body.customer-mode .topbar{padding:0 16px}}
+    .sidebar{overflow-y:auto}
+    .catalog-navigation{display:grid;gap:6px;padding:12px 0}
+    .catalog-nav-title{padding:8px 11px;color:#a8c4b8;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .catalog-nav-item{width:100%;padding:8px 11px;border:0;border-radius:7px;background:transparent;color:#c1d1c9;text-align:left;font-size:10px;font-weight:600}
+    .catalog-nav-item:hover,.catalog-nav-item.active{background:#ffffff17;color:#fff}
+    .topbar{position:sticky;top:0;z-index:12;padding-top:env(safe-area-inset-top)}
+    .top-actions{flex-wrap:nowrap}
+    .customer-mode .sidebar{display:flex;width:220px}
+    .customer-mode .main{margin-left:220px}
+    .customer-mode .content{max-width:1180px}
+    .customer-mode #owner-nav,.customer-mode .sidebar-bottom{display:none}
+    .customer-mode .catalog-navigation{margin-top:5px}
+    .customer-mode .catalog-nav-item{font-size:11px}
+    .catalog-actions{display:flex;flex-wrap:wrap;gap:8px}
+    .service-categories{align-items:start}
+    .service-card{position:relative}
+    .service-edit{display:flex;justify-content:flex-end;margin-top:8px}
+    .service-edit .job-action{font-size:10px}
+    .customer-service-catalog{margin:0 0 18px}
+    .customer-service-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;padding:14px}
+    .customer-service-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff}
+    .customer-service-item strong{font-size:11px}
+    .customer-service-item span{color:var(--green-2);font-size:11px;font-weight:700;white-space:nowrap}
+    .customer-workshop{min-height:245px}
+    .customer-workshop .car-slide{position:absolute;inset:0;width:100%;height:100%;min-height:245px;object-fit:cover;opacity:0;transition:opacity .6s ease}
+    .customer-workshop .car-slide.active{opacity:1}
+    .customer-workshop:after{z-index:1;pointer-events:none}
+    .customer-workshop figcaption{right:80px;bottom:15px;left:13px}
+    .car-slide-controls{position:absolute;z-index:2;right:10px;bottom:8px;display:flex;align-items:center;gap:5px;color:white;font-size:9px}
+    .car-slide-controls button{display:grid;width:22px;height:22px;place-items:center;border:1px solid #ffffff80;border-radius:50%;background:#17231f99;color:white;font-size:17px;line-height:1}
+    .customer-car-rail{overflow:hidden}
+    .customer-moving-car,.login-car{animation:kvr-drive 12s linear infinite}
+    @keyframes kvr-drive{from{left:0}to{left:calc(100% - 48px)}}
+    .feedback-form{display:grid;gap:12px}
+    .feedback-stars{display:flex;gap:8px}
+    .feedback-stars button{border:0;background:none;color:#b8c2bc;font-size:27px}
+    .feedback-stars button.selected{color:#d9a83b}
+    .report-download{margin-left:auto}
+    @media(max-width:780px){
+      .customer-mode .sidebar{position:relative;inset:auto;z-index:11;width:100%;height:auto;min-height:0;padding:7px 12px;background:var(--green)}
+      .customer-mode .brand{padding:0 7px 5px}
+      .customer-mode .catalog-navigation{display:block;overflow-x:auto;padding:2px 0;white-space:nowrap}
+      .customer-mode .catalog-nav-title{display:none}
+      .customer-mode #catalog-navigation-items{display:flex;gap:5px}
+      .customer-mode .catalog-nav-item{width:auto;flex:0 0 auto;padding:7px 10px}
+      .customer-mode .main{margin-left:0}
+      .customer-mode .topbar{position:sticky;top:0;padding:0 12px}
+      .customer-mode .content{padding:20px 16px 42px}
+      .customer-mode .sidebar-bottom{display:none}
+      .owner-view .service-categories{grid-template-columns:1fr}
+    }
+    @media(max-width:540px){
+      .topbar{height:auto;min-height:58px;padding:5px 8px}
+      .top-actions{gap:5px}
+      .top-actions .button{min-height:34px;padding:0 8px;font-size:9px}
+      .top-actions .switcher button{padding:6px 7px;font-size:9px}
+      .top-actions .icon-button{width:32px;height:32px}
+      .customer-workshop{display:block}
+      .customer-workshop .car-slide,.customer-workshop img{min-height:160px}
+      .customer-hero-art{grid-template-columns:1fr 1fr}
+      .customer-sign img{height:100%;aspect-ratio:auto}
+      .customer-workshop figcaption{right:8px;bottom:12px;left:8px;font-size:8px}
+      .car-slide-controls{right:5px;bottom:4px;gap:3px}
+      .customer-service-list{grid-template-columns:1fr}
+      .catalog-actions{width:100%}
+      .catalog-actions .button{flex:1}
+    }
+    @media(prefers-reduced-motion:reduce){.customer-moving-car,.login-car{animation:none;left:calc(100% - 48px)}.customer-workshop .car-slide{transition:none}}
   </style>
 </head>
 <body>
@@ -87,6 +151,7 @@
       <button data-page="services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m14.7 6.3 3 3M5 19l4-1 9.7-9.7a2.1 2.1 0 0 0-3-3L6 15l-1 4Z"/><path d="m14 4 6 6M4 21h16"/></svg><span>Services &amp; prices</span></button>
       <button data-page="reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V5m0 14h17"/><path d="m7 15 4-4 3 2 6-7"/></svg><span>Reports &amp; analytics</span></button>
     </nav>
+    <div class="catalog-navigation" id="catalog-navigation"><div class="catalog-nav-title">Categories &amp; services</div><div id="catalog-navigation-items"></div></div>
     <div class="sidebar-bottom">
       <div class="help-card"><strong>Need a hand?</strong><p>Questions about your workshop portal? We're here to help.</p><a href="tel:+919876543210">Call workshop →</a></div>
       <div class="profile"><div class="avatar">RK</div><div><strong>Ravi Kumar</strong><small>Workshop owner</small></div></div>
@@ -144,20 +209,21 @@
           <div class="toolbar"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="vehicle-search" placeholder="Search make, model or registration..."></label></div><div class="customer-cards" id="vehicle-cards"></div>
         </section>
         <section class="page-section" id="page-services">
-          <div class="welcome"><div><div class="eyebrow">Transparent estimates</div><h1>Services &amp; prices</h1><p>Approximate service rates. Final price may vary after inspection.</p></div></div><div class="service-categories" id="service-categories"></div>
+          <div class="welcome"><div><div class="eyebrow">Transparent estimates</div><h1>Services &amp; prices</h1><p>Approximate service rates. Final price may vary after inspection.</p></div><div class="catalog-actions"><button class="button outline" data-action="add-category">＋ Add category</button><button class="button" data-action="add-service">＋ Add service</button></div></div><div class="service-categories" id="service-categories"></div>
         </section>
         <section class="page-section" id="page-reports">
-          <div class="welcome"><div><div class="eyebrow">Workshop performance</div><h1>Reports &amp; analytics</h1><p>A quick look at revenue, completed jobs and service mix.</p></div><select class="select-small" aria-label="Report period"><option>This month</option><option>Last month</option></select></div>
+          <div class="welcome"><div><div class="eyebrow">Workshop performance</div><h1>Reports &amp; analytics</h1><p>A quick look at revenue, completed jobs and service mix.</p></div><div class="catalog-actions"><select class="select-small" aria-label="Report period"><option>This month</option><option>Last month</option></select><button class="button" data-action="download-report">Download report</button></div></div>
           <div class="report-grid"><section class="panel chart-panel"><h3>Monthly revenue</h3><div class="bars"><div class="bar-col"><div class="bar" style="height:46%"></div><small>May</small></div><div class="bar-col"><div class="bar" style="height:57%"></div><small>Jun</small></div><div class="bar-col"><div class="bar" style="height:49%"></div><small>Jul</small></div><div class="bar-col"><div class="bar" style="height:71%"></div><small>Aug</small></div><div class="bar-col"><div class="bar" style="height:64%"></div><small>Sep</small></div><div class="bar-col"><div class="bar" style="height:91%"></div><small>Oct</small></div></div></section><div class="report-numbers"><article><small>Average invoice value</small><strong>₹2,965</strong></article><article><small>Customer satisfaction</small><strong>4.8 <span style="font-size:14px;color:#d9a83b">★</span></strong></article><article><small>Most requested</small><strong style="font-size:17px">General service</strong></article><article><small>Returning customers</small><strong>68%</strong></article></div></div>
         </section>
       </div>
       <div id="customer-view" class="customer-view" hidden>
         <section class="customer-hero" aria-label="KVR Car Care">
-          <div class="customer-hero-art"><div class="customer-sign"><img src="assets/kvr-signboard.png" alt="KVR Car Care signboard with engine, interior and car service illustrations"></div><figure class="customer-workshop"><img src="assets/kvr-workshop.png" alt="Cars being serviced inside KVR Car Care workshop"><figcaption>Real cars. Reliable care. Right here in Guntur.</figcaption></figure></div>
+          <div class="customer-hero-art"><div class="customer-sign"><img src="assets/kvr-signboard.png" alt="KVR Car Care signboard with engine, interior and car service illustrations"></div><figure class="customer-workshop" id="customer-car-showcase"><img class="car-slide active" src="assets/car-slide-1.svg" alt="Blue car in a clean workshop"><img class="car-slide" src="assets/car-slide-2.svg" alt="Red SUV in a clean workshop"><img class="car-slide" src="assets/car-slide-3.svg" alt="Silver sedan in a clean workshop"><figcaption>Care for every car, at KVR Car Care.</figcaption><div class="car-slide-controls"><button type="button" data-action="car-slide-prev" aria-label="Previous car">‹</button><span id="car-slide-count">1 / 3</span><button type="button" data-action="car-slide-next" aria-label="Next car">›</button></div></figure></div>
           <div class="customer-hero-copy"><div><span class="eyebrow">Your trusted automotive partner</span><h2>Welcome to KVR Car Care</h2><p>Palakaluru Road, Guntur · Mechanical, AC, denting, painting and washing.</p></div><a class="button button-light" target="_blank" rel="noreferrer" href="https://www.google.com/maps/dir/?api=1&amp;destination=KVR+Car+Care%2C+Palakaluru+Road%2C+Guntur%2C+Andhra+Pradesh">Get directions ↗</a></div>
           <div class="customer-car-rail" aria-label="A car moving along the road"><span class="customer-moving-car" aria-hidden="true"><svg viewBox="0 0 64 36"><path d="m8 22 5-11c1-3 3-4 6-4h25c3 0 5 1 7 4l5 11v7H8v-7Z" fill="#d82439" stroke="#fff" stroke-width="2"/><path d="m18 11-3 9h15v-9Zm17 0v9h17l-4-7c-1-2-2-2-5-2Z" fill="#c6e4ed"/><circle cx="18" cy="29" r="5" fill="#1c252b" stroke="#fff" stroke-width="2"/><circle cx="47" cy="29" r="5" fill="#1c252b" stroke="#fff" stroke-width="2"/></svg></span></div>
         </section>
         <section class="customer-banner"><div><div class="eyebrow">Your service at a glance</div><h1 id="customer-welcome">Welcome back 👋</h1><p>Keep up with your vehicle service, all in one place.</p></div><button class="button" data-action="customer-request">＋ Raise a service request</button></section>
+        <section class="panel customer-service-catalog"><div class="panel-head"><div><h2 id="customer-catalog-title">Categories &amp; services</h2><p>Choose a category to see our services and estimated prices.</p></div></div><div id="customer-service-catalog"></div></section>
         <div class="customer-tiles"><article class="customer-tile"><span>MY VEHICLES</span><strong id="customer-vehicle-count">0 vehicles</strong></article><article class="customer-tile"><span>ACTIVE SERVICE</span><strong id="customer-active-count">0 jobs</strong></article><article class="customer-tile"><span>COMPLETED SERVICES</span><strong id="customer-completed-count">0 services</strong></article></div>
         <div class="customer-main-grid"><section class="panel"><div class="panel-head"><div><h2>My service requests</h2><p>Live updates from the workshop</p></div><span class="status progress">Live updates</span></div><div id="customer-requests"></div></section><div style="display:grid;align-content:start;gap:14px"><section class="panel"><div class="panel-head"><div><h2>My vehicles</h2><p>Registered vehicles</p></div><button class="link-button" data-action="customer-vehicle">＋ Add</button></div><div id="customer-vehicles"></div></section><section class="panel"><div class="panel-head"><div><h2>Need help?</h2><p>We're happy to help with your vehicle.</p></div></div><div style="padding:17px"><a class="button" style="width:100%" href="tel:+919876543210">☎ &nbsp; Call workshop</a><a class="button outline" style="width:100%;margin-top:8px" target="_blank" rel="noreferrer" href="https://www.google.com/maps/dir/?api=1&amp;destination=KVR+Car+Care%2C+Palakaluru+Road%2C+Guntur%2C+Andhra+Pradesh">↗ &nbsp; Get directions</a><a class="button soft" style="width:100%;margin-top:8px" target="_blank" rel="noreferrer" href="https://wa.me/917093441878?text=Hello%20KVR%20Car%20Care">WhatsApp workshop · +91 70934 41878</a></div></section></div></div>
         <section class="panel owner-history-table"><div class="panel-head"><div><h2>My service history</h2><p>Completed services and invoices</p></div></div><div class="table-wrap"><table><thead><tr><th>Invoice</th><th>Vehicle</th><th>Service</th><th>Date</th><th>Total</th><th>Download</th></tr></thead><tbody id="customer-history"></tbody></table></div></section>
@@ -169,7 +235,7 @@
 <div class="toast" id="toast" role="status"></div>
 <script>
 (() => {
-  const services = {
+  const defaultServices = {
     "AIR CONDITIONING":[["AC Checkup",499],["AC Gas Refill",1500],["AC Filter Replacement",700],["Compressor Repair",4500],["Compressor Replacement",12000],["Cooling Coil Cleaning",1000]],
     "ENGINE":[["Engine Diagnostics",700],["Tune Up",2000],["Engine Service",4000],["Engine Overhaul",35000]],
     "GENERAL SERVICE":[["Basic Service",2500],["Full Service",5500],["Premium Service",8500]],
@@ -197,6 +263,9 @@
   };
   let state;
   try { state=JSON.parse(localStorage.getItem("kvr-car-care-state"))||seed; } catch(error) { console.error("Could not read saved workshop data.",error); state=seed; }
+  let services=state.services||defaultServices;
+  state.services=services;
+  let selectedCategory=Object.keys(services)[0]||"";
   const persist=()=>{try{localStorage.setItem("kvr-car-care-state",JSON.stringify(state));}catch(error){console.error("Could not save workshop data.",error);toast("Changes couldn't be saved in this browser.");}};
   let signedInUser=null;
   const appMode=window.kvrAppMode;
@@ -286,7 +355,7 @@
     showInstallHelp();
   }
   function safeAttr(value){return esc(value);}
-  function render(){renderJobs();renderCustomers();renderVehicles();renderServices();renderCustomerPortal();$("#request-count").textContent=state.jobs.filter(j=>!["Completed","Ready for pickup"].includes(j.status)).length;$("#active-stat").textContent=state.jobs.filter(j=>!["Completed","Ready for pickup"].includes(j.status)).length+3;$("#ready-stat").textContent=state.jobs.filter(j=>j.status==="Ready for pickup").length||2;}
+  function render(){renderJobs();renderCustomers();renderVehicles();renderServices();renderCatalogNavigation();renderCustomerCatalog();renderCustomerPortal();$("#request-count").textContent=state.jobs.filter(j=>!["Completed","Ready for pickup"].includes(j.status)).length;$("#active-stat").textContent=state.jobs.filter(j=>!["Completed","Ready for pickup"].includes(j.status)).length+3;$("#ready-stat").textContent=state.jobs.filter(j=>j.status==="Ready for pickup").length||2;}
   function renderJobs(){
     const jobs=state.jobs;
     $("#dashboard-jobs").innerHTML=jobs.slice(0,4).map(j=>`<tr><td><span class="job-id">${esc(j.id)}</span></td><td><div class="customer-cell"><span class="mini-avatar">${initials(j.customer)}</span><div><strong>${esc(j.customer)}</strong><small>${esc(j.created)}</small></div></div></td><td><div class="vehicle-cell"><strong>${esc(j.vehicle)}</strong><small>${esc(j.reg)}</small></div></td><td>${esc(j.service)}</td><td>${statusTag(j.status)}</td><td><button class="job-action" data-job="${safeAttr(j.id)}" data-action="edit-job">Manage</button></td></tr>`).join("");
@@ -303,7 +372,51 @@
     const q=($("#vehicle-search")?.value||"").toLowerCase(),items=state.customers.flatMap(c=>c.vehicles.map(v=>({owner:c.name,phone:c.phone,detail:v}))).filter(v=>(v.owner+" "+v.detail).toLowerCase().includes(q));
     $("#vehicle-cards").innerHTML=items.map(v=>{const parts=v.detail.split(" — ");return `<article class="vehicle-card"><div class="customer-card-top"><span class="car-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3 14 1.8-5.2A2.7 2.7 0 0 1 7.4 7h9.2a2.7 2.7 0 0 1 2.6 1.8L21 14v5h-3v-2H6v2H3v-5Z"/><path d="M3 14h18"/></svg></span><div><h3>${esc(parts[0])}</h3><small>${esc(parts[1]||"Registration pending")}</small></div></div><div class="card-meta"><div><span>OWNER</span><strong>${esc(v.owner)}</strong></div><div><span>LAST SERVICE</span><strong>Oct 22, 2026</strong></div></div></article>`}).join("")||`<div class="panel empty">No vehicles found.</div>`;
   }
-  function renderServices(){$("#service-categories").innerHTML=Object.entries(services).map(([category,items])=>`<article class="service-card"><h3>${esc(category)}</h3><div class="price-list">${items.map(([name,price])=>`<div class="price-row"><span>${esc(name)}</span><strong>${money(price)}${name==="Battery Replacement"?" +":""}</strong></div>`).join("")}</div></article>`).join("");}
+  function renderServices(){
+    const categories=Object.entries(services);
+    if(!categories.some(([category])=>category===selectedCategory))selectedCategory=categories[0]?.[0]||"";
+    $("#service-categories").innerHTML=categories.filter(([category])=>category===selectedCategory).map(([category,items])=>`<article class="service-card"><h3>${esc(category)}</h3><div class="price-list">${items.map(([name,price],index)=>`<div class="price-row"><span>${esc(name)}</span><strong>${money(price)}</strong><span class="service-edit"><button class="job-action" data-action="edit-service" data-category="${safeAttr(category)}" data-index="${index}">Edit</button></span></div>`).join("")||'<div class="empty">No services in this category.</div>'}</div></article>`).join("")||'<div class="panel empty">Add a category to start listing services.</div>';
+  }
+  function renderCatalogNavigation(){
+    $("#catalog-navigation-items").innerHTML=Object.keys(services).map(category=>`<button class="catalog-nav-item ${category===selectedCategory?"active":""}" data-catalog-category="${safeAttr(category)}">${esc(category)}</button>`).join("")||'<span class="catalog-nav-item">No categories yet</span>';
+  }
+  function renderCustomerCatalog(){
+    const items=services[selectedCategory]||[];
+    $("#customer-catalog-title").textContent=selectedCategory?`${selectedCategory} services`:"Categories & services";
+    $("#customer-service-catalog").innerHTML=items.length?`<div class="customer-service-list">${items.map(([name,price])=>`<article class="customer-service-item"><strong>${esc(name)}</strong><span>${money(price)}</span></article>`).join("")}</div>`:'<div class="empty">No services are listed for this category yet.</div>';
+  }
+  function addCategory(){
+    showModal("Add a service category",`<form id="category-form" class="form-grid"><div class="form-field full"><label for="category-name">Category name</label><input id="category-name" name="name" placeholder="e.g. TYRES" required maxlength="50"></div></form>`,`<button class="button outline" data-close>Cancel</button><button class="button" data-action="save-category">Add category</button>`);
+  }
+  function saveCategory(){
+    const form=$("#category-form");if(!form.reportValidity())return;
+    const name=String(new FormData(form).get("name")).trim().toUpperCase();
+    if(Object.keys(services).some(category=>category.toLowerCase()===name.toLowerCase())){toast("That category already exists.");return;}
+    services[name]=[];state.services=services;selectedCategory=name;persist();render();closeModal();gotoPage("services");toast(`${name} category added.`);
+  }
+  function serviceEditor({category="",index=-1}={}){
+    const item=index>=0?services[category]?.[index]:null;
+    const choices=Object.keys(services).map(name=>`<option value="${esc(name)}" ${name===category?"selected":""}>${esc(name)}</option>`).join("");
+    showModal(item?"Edit service":"Add a service",`<form id="service-form" class="form-grid"><div class="form-field full"><label for="service-name">Service name</label><input id="service-name" name="name" value="${esc(item?.[0]||"")}" required maxlength="80"></div><div class="form-field"><label for="service-category">Category</label><select id="service-category" name="category" required>${choices}</select></div><div class="form-field"><label for="service-price">Price (₹)</label><input id="service-price" type="number" name="price" value="${Number(item?.[1]||0)}" min="0" step="1" required></div></form>`,`<button class="button outline" data-close>Cancel</button>${item?`<button class="button danger" data-action="delete-service" data-category="${safeAttr(category)}" data-index="${index}">Delete</button>`:""}<button class="button" data-action="save-service" data-category="${safeAttr(category)}" data-index="${index}">Save service</button>`);
+  }
+  function saveService(button){
+    const form=$("#service-form");if(!form.reportValidity())return;
+    const data=new FormData(form),category=String(data.get("category")),name=String(data.get("name")).trim(),price=Number(data.get("price")),oldCategory=button.dataset.category,index=Number(button.dataset.index);
+    if(!services[category]||!name||!Number.isFinite(price)||price<0){toast("Enter a valid service name, category and price.");return;}
+    const collision=services[category].some((item,itemIndex)=>item[0].toLowerCase()===name.toLowerCase()&&!(category===oldCategory&&itemIndex===index));
+    if(collision){toast("That service already exists in this category.");return;}
+    if(Number.isInteger(index)&&index>=0&&services[oldCategory]?.[index]){
+      services[oldCategory].splice(index,1);
+      if(category!==oldCategory)services[category].push([name,price]);
+      else services[category].splice(Math.min(index,services[category].length),0,[name,price]);
+    }else services[category].push([name,price]);
+    selectedCategory=category;state.services=services;persist();render();closeModal();toast("Service and price saved.");
+  }
+  function deleteService(button){
+    const category=button.dataset.category,index=Number(button.dataset.index);
+    if(!services[category]?.[index]){toast("That service could not be found.");return;}
+    services[category].splice(index,1);state.services=services;persist();render();closeModal();toast("Service removed.");
+  }
   function renderCustomerPortal(){
     const jobs=state.jobs.filter(j=>j.customer==="Ramesh Kumar");
     $("#customer-active-count").textContent=`${jobs.filter(j=>!["Completed","Ready for pickup"].includes(j.status)).length} active job`;
@@ -327,7 +440,7 @@
   }
   function renderHistory(){
     $("#owner-history-count").textContent=`${state.jobs.length} recorded job${state.jobs.length===1?"":"s"}`;
-    $("#owner-history-table").innerHTML=state.jobs.length?state.jobs.map(j=>`<tr><td>${esc(j.invoiceId||j.id)}</td><td>${esc(j.customer)}<small style="display:block;color:var(--muted);margin-top:3px">${esc(j.phone)}</small></td><td>${esc(j.vehicle)}<small style="display:block;color:var(--muted);margin-top:3px">${esc(j.reg)}</small></td><td>${esc(j.service)}</td><td>${statusTag(j.status)}</td><td>${money(total(j))}</td><td><button class="job-action" data-action="invoice" data-job="${safeAttr(j.id)}">Invoice</button></td></tr>`).join(""):`<tr><td colspan="7"><div class="empty">No service history yet.</div></td></tr>`;
+    $("#owner-history-table").innerHTML=state.jobs.length?state.jobs.map(j=>`<tr><td>${esc(j.invoiceId||j.id)}</td><td>${esc(j.customer)}<small style="display:block;color:var(--muted);margin-top:3px">${esc(j.phone)}</small></td><td>${esc(j.vehicle)}<small style="display:block;color:var(--muted);margin-top:3px">${esc(j.reg)}</small></td><td>${esc(j.service)}</td><td>${statusTag(j.status)}</td><td>${money(total(j))}</td><td><button class="job-action" data-action="invoice" data-job="${safeAttr(j.id)}">Invoice</button>${j.status==="Completed"?` <button class="job-action" data-action="request-feedback" data-job="${safeAttr(j.id)}">Request feedback</button>`:""}</td></tr>`).join(""):`<tr><td colspan="7"><div class="empty">No service history yet.</div></td></tr>`;
   }
   function gotoPage(page){if(signedInUser?.role!=="owner")return;$$(".page-section").forEach(s=>s.classList.toggle("active",s.id==="page-"+page));$$("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));$("#breadcrumb-current").textContent=({dashboard:"Dashboard",requests:"Service requests",history:"Service history",customers:"Customers",vehicles:"Vehicles",services:"Services & prices",reports:"Reports & analytics"})[page]||"Dashboard";window.scrollTo({top:0,behavior:"smooth"});}
   function showModal(title,body,buttons){$("#modal-title").textContent=title;$("#modal-body").innerHTML=body;$("#modal-foot").innerHTML=buttons;$("#modal-backdrop").classList.add("open");}
@@ -355,7 +468,7 @@
     const activeCustomer=customerMode?customerForUser():null;
     const options=(customerMode?(activeCustomer?[activeCustomer]:[]):state.customers).map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join("");
     const categories=Object.keys(services).map(category=>`<option>${esc(category)}</option>`).join("");
-    showModal("Raise a service request",`<form id="request-form" class="form-grid"><div class="form-field"><label for="req-customer">Customer</label><select required name="customer" id="req-customer">${customerMode?options:`<option value="">Select customer</option>${options}`}</select></div><div class="form-field"><label for="req-phone">Phone number</label><input id="req-phone" name="phone" required></div><div class="form-field"><label for="req-vehicle">Vehicle</label><input id="req-vehicle" name="vehicle" placeholder="e.g. Hyundai i20" required></div><div class="form-field"><label for="req-reg">Registration number</label><input id="req-reg" name="reg" placeholder="AP 07 AB 1234" required></div><div class="form-field"><label for="req-category">Service category</label><select id="req-category" name="category" required><option value="">Choose category</option>${categories}</select></div><div class="form-field"><label for="req-service">Service</label><select id="req-service" name="service" required><option value="">Choose service</option></select></div><div class="form-field full"><label for="req-description">Describe the issue</label><textarea id="req-description" name="description" placeholder="Tell us what happened and any symptoms..." required></textarea></div></form>`,`<button class="button outline" data-close>Cancel</button><button class="button" data-action="submit-request">Submit request</button>`);
+    showModal("Raise a service request",`<form id="request-form" class="form-grid"><div class="form-field"><label for="req-customer">Customer</label><select required name="customer" id="req-customer">${customerMode?options:`<option value="">Select customer</option>${options}`}</select></div><div class="form-field"><label for="req-phone">Phone number</label><input id="req-phone" name="phone" required></div><div class="form-field"><label for="req-vehicle">Vehicle</label><input id="req-vehicle" name="vehicle" placeholder="e.g. Hyundai i20" required></div><div class="form-field"><label for="req-reg">Registration number</label><input id="req-reg" name="reg" placeholder="AP 07 AB 1234" required></div><div class="form-field"><label for="req-category">Service category</label><select id="req-category" name="category" required><option value="">Choose category</option>${categories}</select></div><div class="form-field"><label for="req-service">Service</label><select id="req-service" name="service" required><option value="">Choose service</option></select></div><div class="form-field full"><label for="req-description">Describe the issue</label><textarea id="req-description" name="description" placeholder="Tell us what happened and any symptoms..." required></textarea></div>${customerMode?'<div class="form-field full"><label for="customer-photos">Add vehicle photos (up to 3)</label><input id="customer-photos" name="customerPhotos" type="file" accept="image/*" multiple><small class="muted">Photos are saved only in this browser in the demo.</small></div>':""}</form>`,`<button class="button outline" data-close>Cancel</button><button class="button" data-action="submit-request">Submit request</button>`);
     $("#req-customer").addEventListener("change",event=>{const customer=state.customers.find(item=>item.name===event.target.value);if(!customer)return;$("#req-phone").value=customer.phone;const vehicle=customer.vehicles[0]?.split(" — ");if(vehicle){$("#req-vehicle").value=vehicle[0];$("#req-reg").value=vehicle[1]||"";}});
     $("#req-category").addEventListener("change",event=>{$("#req-service").innerHTML='<option value="">Choose service</option>'+(services[event.target.value]||[]).map(([name,price])=>`<option value="${esc(name)}">${esc(name)} — ${money(price)}</option>`).join("");});
     if(customerMode&&activeCustomer){$("#req-customer").value=activeCustomer.name;$("#req-customer").disabled=true;$("#req-phone").value=activeCustomer.phone;const vehicle=activeCustomer.vehicles[0]?.split(" — ");if(vehicle){$("#req-vehicle").value=vehicle[0];$("#req-reg").value=vehicle[1]||"";}}
@@ -369,45 +482,120 @@
     const vehicle=String(data.get("vehicle")).trim(),reg=String(data.get("reg")).trim();
     if(!customer.vehicles.some(item=>item.toLowerCase()===`${vehicle} — ${reg}`.toLowerCase()))customer.vehicles.unshift(`${vehicle} — ${reg}`);
     const number=Math.max(15,...state.jobs.map(job=>Number(job.id.split("-").pop())||0))+1;
-    state.jobs.unshift({id:`KVR-${new Date().getFullYear()}-${String(number).padStart(3,"0")}`,customer:customer.name,phone:customer.phone,vehicle,reg,service:String(data.get("service")),category:String(data.get("category")),description:String(data.get("description")).trim(),status:"Received",technician:"Unassigned",remarks:"Request received. Awaiting assignment.",photos:[],parts:[],labour:0,created:new Date().toLocaleString("en-IN")});
-    persist();render();closeModal();toast("Service request submitted to KVR Car Care.");
+    const job={id:`KVR-${new Date().getFullYear()}-${String(number).padStart(3,"0")}`,customer:customer.name,phone:customer.phone,vehicle,reg,service:String(data.get("service")),category:String(data.get("category")),description:String(data.get("description")).trim(),status:"Received",technician:"Unassigned",remarks:"Request received. Awaiting assignment.",photos:[],parts:[],labour:0,created:new Date().toLocaleString("en-IN")};
+    const files=Array.from($("#customer-photos")?.files||[]).slice(0,3);
+    state.jobs.unshift(job);persist();render();closeModal();
+    if(files.length){
+      Promise.all(files.map(readPhoto)).then(photos=>{job.photos.push(...photos);persist();render();toast("Request submitted with your photos.");}).catch(error=>{console.error("Customer vehicle photos could not be added.",error);toast("Request submitted, but one or more photos could not be added.");});
+    }else toast("Service request submitted to KVR Car Care.");
   };
   invoiceMarkup=function(job){
     const invoiceNo=job.invoiceId||job.id,invoiceDate=job.invoiceDate||new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
     const items=[...(job.parts||[]),...(Number(job.labour)>0?[{name:"Labour Charge",qty:1,amount:Number(job.labour)}]:[])];
     return `<div class="invoice invoice-print"><div class="invoice-head"><div class="invoice-brand">KVR CAR CARE<small>Palakaluru Road, Guntur, Andhra Pradesh<br>+91 9876543210</small></div><div class="invoice-meta"><strong>TAX INVOICE</strong><br>Invoice No: ${esc(invoiceNo)}<br>Date: ${esc(invoiceDate)}</div></div><div class="invoice-customer"><div><span>Bill to</span><strong>${esc(job.customer)}</strong><div class="muted" style="font-size:10px;margin-top:4px">${esc(job.phone)}</div></div><div><span>Vehicle</span><strong>${esc(job.vehicle)}</strong><div class="muted" style="font-size:10px;margin-top:4px">${esc(job.reg)}</div></div></div><table><thead><tr><th>S.No</th><th>Particulars</th><th>Qty</th><th style="text-align:right">Amount</th></tr></thead><tbody>${items.length?items.map((item,index)=>`<tr><td>${index+1}</td><td>${esc(item.name)}</td><td>${Number(item.qty||1)}</td><td style="text-align:right">${money(Number(item.amount)*Number(item.qty||1))}</td></tr>`).join(""):`<tr><td>1</td><td>${esc(job.service)}</td><td>1</td><td style="text-align:right">${money(total(job))}</td></tr>`}</tbody></table><div class="invoice-total"><span>Total payable</span><strong>${money(total(job))}</strong></div><div class="invoice-thanks">Thank you for choosing KVR Car Care. Visit again!</div></div>`;
   };
-  saveJob=function(id){
+  function readPhoto(file){
+    if(!file.type.startsWith("image/"))return Promise.reject(new Error("Selected upload is not an image."));
+    return new Promise((resolve,reject)=>{
+      const reader=new FileReader();
+      reader.onerror=()=>reject(reader.error||new Error("Image file could not be read."));
+      reader.onload=()=>{
+        const image=new Image();
+        image.onerror=()=>reject(new Error("Image could not be decoded."));
+        image.onload=()=>{
+          const scale=Math.min(1,1280/image.width),canvas=document.createElement("canvas");
+          canvas.width=Math.max(1,Math.round(image.width*scale));canvas.height=Math.max(1,Math.round(image.height*scale));
+          const context=canvas.getContext("2d");
+          if(!context){reject(new Error("Image processing is unavailable in this browser."));return;}
+          context.drawImage(image,0,0,canvas.width,canvas.height);
+          resolve(canvas.toDataURL("image/jpeg",.78));
+        };
+        image.src=String(reader.result);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  function createInvoiceId(){
+    const now=new Date(),dateKey=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`,dayMonth=`${String(now.getDate()).padStart(2,"0")}${String(now.getMonth()+1).padStart(2,"0")}`;
+    const sequence=state.jobs.filter(job=>job.invoiceDateKey===dateKey).length+1;
+    return {invoiceId:`KVR-${dayMonth}-${String(sequence).padStart(2,"0")}`,invoiceDateKey:dateKey,invoiceDate:now.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"})};
+  }
+  saveJob=async function(id){
     const job=state.jobs.find(item=>item.id===id),form=$("#job-form");if(!job||!form)return;
-    const oldStatus=job.status,data=new FormData(form);
+    const oldStatus=job.status,data=new FormData(form),files=Array.from($("#job-photo")?.files||[]).slice(0,4);
     job.status=String(data.get("status"));job.technician=String(data.get("technician")||"").trim()||"Unassigned";job.remarks=String(data.get("remarks")||"").trim()||job.remarks;job.labour=Number(data.get("labour"))||0;
     job.parts=$$(".parts-row",form).map(row=>({name:$('[data-part="name"]',row).value.trim(),qty:Number($('[data-part="qty"]',row).value)||1,amount:Number($('[data-part="amount"]',row).value)||0})).filter(part=>part.name);
     const becameComplete=job.status==="Completed"&&oldStatus!=="Completed";
-    if(becameComplete){job.invoiceId=`KVR-INV-${new Date().getFullYear()}-${job.id.split("-").pop()}`;job.invoiceDate=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});}
+    if(becameComplete&&!job.invoiceId)Object.assign(job,createInvoiceId());
     persist();render();closeModal();
     if(becameComplete){
       const lines=[...(job.parts||[]).map(part=>`${part.name} x${part.qty}: ${money(part.amount*part.qty)}`),...(job.labour>0?[`Labour charge: ${money(job.labour)}`]:[])];
-      const message=`Hello ${job.customer}, your vehicle service at KVR Car Care is completed. Invoice ${job.invoiceId} (${job.invoiceDate}).${lines.length?` Details: ${lines.join("; ")}.`:""} Total: ${money(total(job))}. Please download the invoice from your customer portal.`;
+      const message=`Hello ${job.customer}, your ${job.vehicle} service at KVR Car Care is complete. Invoice ${job.invoiceId} (${job.invoiceDate}).${lines.length?` Items: ${lines.join("; ")}.`:""} Total: ${money(total(job))}. Reply to this chat if you need a PDF copy of the invoice.`;
       const target=window.open(`https://wa.me/${whatsappDigits(job.phone)}?text=${encodeURIComponent(message)}`,"_blank");
       if(target)target.opener=null;
-      toast("Service completed; review and send the invoice message in WhatsApp.");
-    }else{
-      const files=$("#job-photo")?.files;
-      if(files?.length){
-        let remaining=Math.min(files.length,4),failed=false;
-        Array.from(files).slice(0,4).forEach(file=>{const reader=new FileReader();reader.onload=()=>{job.photos.push(reader.result);remaining--;if(remaining===0){persist();render();toast(failed?"Job saved; one or more photos could not be added.":"Progress update and photos saved.");}};reader.onerror=()=>{console.error("Photo upload could not be read.");failed=true;remaining--;if(remaining===0){persist();render();toast("Job saved; one or more photos could not be added.");}};reader.readAsDataURL(file);});
-        return;
-      }
-      toast("Job status and customer update saved.");
+      toast("Invoice created. Review and send the WhatsApp message; automatic sending is not available in this app.");
+    }else toast("Job status and customer update saved.");
+    if(files.length){
+      try{
+        job.photos.push(...await Promise.all(files.map(readPhoto)));
+        persist();render();toast("Job update and photos saved.");
+      }catch(error){console.error("Workshop progress photos could not be added.",error);toast("Job update saved, but one or more photos could not be added.");}
     }
-    const files=$("#job-photo")?.files;
-    if(files?.length){let remaining=Math.min(files.length,4);Array.from(files).slice(0,4).forEach(file=>{const reader=new FileReader();reader.onload=()=>{job.photos.push(reader.result);remaining--;if(remaining===0){persist();render();}};reader.onerror=()=>{console.error("Photo upload could not be read.");remaining--;if(remaining===0)toast("Job completed; a photo could not be added.");};reader.readAsDataURL(file);});}
   };
   addVehicle=function(){
     if(signedInUser?.role!=="customer"){showModal("Add a vehicle",`<form id="add-vehicle-form" class="form-grid"><div class="form-field full"><label>Vehicle owner</label><select name="customer">${state.customers.map(c=>`<option>${esc(c.name)}</option>`).join("")}</select></div><div class="form-field"><label>Make and model</label><input name="vehicle" placeholder="e.g. Hyundai i20" required></div><div class="form-field"><label>Registration number</label><input name="reg" placeholder="AP 07 AB 1234" required></div></form>`,`<button class="button outline" data-close>Cancel</button><button class="button" data-action="save-vehicle">Add vehicle</button>`);return;}
     showModal("Add a vehicle",`<form id="add-vehicle-form" class="form-grid"><div class="form-field"><label>Make and model</label><input name="vehicle" placeholder="e.g. Hyundai i20" required></div><div class="form-field"><label>Registration number</label><input name="reg" placeholder="AP 07 AB 1234" required></div></form>`,`<button class="button outline" data-close>Cancel</button><button class="button" data-action="save-customer-vehicle">Add vehicle</button>`);
   };
   const originalHandleAction=handleAction;
+  let feedbackRating=0,feedbackFormShown=false,carSlideIndex=0;
+  function showCarSlide(index){
+    const slides=$$(".car-slide");
+    if(!slides.length)return;
+    carSlideIndex=(index+slides.length)%slides.length;
+    slides.forEach((slide,slideIndex)=>slide.classList.toggle("active",slideIndex===carSlideIndex));
+    $("#car-slide-count").textContent=`${carSlideIndex+1} / ${slides.length}`;
+  }
+  function showFeedbackForm(){
+    const feedbackId=new URLSearchParams(location.search).get("feedback");
+    if(appMode!=="customer"||!feedbackId||feedbackFormShown)return;
+    feedbackFormShown=true;feedbackRating=0;
+    showModal("How was your KVR Car Care service?",`<form id="feedback-form" class="feedback-form"><p>Share a quick rating for service ${esc(feedbackId)}.</p><div class="feedback-stars" role="group" aria-label="Service rating">${[1,2,3,4,5].map(rating=>`<button type="button" class="${rating<=feedbackRating?"selected":""}" data-feedback-rating="${rating}" aria-label="${rating} stars">★</button>`).join("")}</div><div class="form-field"><label for="feedback-comment">Comments (optional)</label><textarea id="feedback-comment" name="comment" maxlength="500" placeholder="Tell us what went well or what we can improve"></textarea></div></form>`,`<button class="button outline" data-close>Later</button><button class="button" data-action="send-feedback" data-job="${safeAttr(feedbackId)}">Send feedback</button>`);
+  }
+  function requestFeedback(id){
+    if(signedInUser?.role!=="owner"){toast("Only the owner can request customer feedback.");return;}
+    const job=state.jobs.find(item=>item.id===id);
+    if(!job){toast("The service record could not be found.");return;}
+    const feedbackUrl=new URL("./index.html",location.href);
+    feedbackUrl.searchParams.set("app","customer");feedbackUrl.searchParams.set("feedback",job.id);
+    const message=`Hello ${job.customer}, thank you for choosing KVR Car Care for your ${job.vehicle}. Please share your feedback here: ${feedbackUrl.href}`;
+    const target=window.open(`https://wa.me/${whatsappDigits(job.phone)}?text=${encodeURIComponent(message)}`,"_blank");
+    if(target)target.opener=null;
+    toast("Feedback request prepared in WhatsApp. Review and send it to the customer.");
+  }
+  function sendFeedback(id){
+    const form=$("#feedback-form");if(!form)return;
+    if(feedbackRating<1){toast("Please choose a star rating before sending feedback.");return;}
+    const comment=String(new FormData(form).get("comment")||"").trim();
+    state.feedback=state.feedback||[];
+    state.feedback.push({jobId:id,rating:feedbackRating,comment,created:new Date().toISOString()});
+    persist();
+    const message=`KVR Car Care service feedback for ${id}: ${feedbackRating}/5 stars.${comment?` ${comment}`:""}`;
+    const target=window.open(`https://wa.me/917093441878?text=${encodeURIComponent(message)}`,"_blank");
+    if(target)target.opener=null;
+    closeModal();toast("Feedback message prepared. Review and send it in WhatsApp.");
+  }
+  function downloadReport(){
+    if(signedInUser?.role!=="owner"){toast("Only the owner can download workshop reports.");return;}
+    const rows=[["Invoice","Job ID","Customer","Phone","Vehicle","Registration","Category","Service","Status","Technician","Parts (₹)","Labour (₹)","Total (₹)","Created"]];
+    state.jobs.forEach(job=>{
+      const parts=job.parts.reduce((sum,part)=>sum+Number(part.amount)*Number(part.qty||1),0);
+      rows.push([job.invoiceId||"",job.id,job.customer,job.phone,job.vehicle,job.reg,job.category,job.service,job.status,job.technician,parts,Number(job.labour||0),total(job),job.invoiceDate||job.created]);
+    });
+    const csv=rows.map(row=>row.map(value=>`"${String(value??"").replace(/"/g,'""')}"`).join(",")).join("\r\n");
+    const url=URL.createObjectURL(new Blob(["\ufeff",csv],{type:"text/csv;charset=utf-8"}));
+    const link=document.createElement("a");link.href=url;link.download=`KVR-service-report-${new Date().toISOString().slice(0,10)}.csv`;link.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);toast("Workshop report downloaded as a CSV file.");
+  }
   handleAction=function(button){
     const action=button.dataset.action;
     if(action==="logout"){signedInUser=null;localStorage.removeItem(demoUserKey);$("#login-gate").hidden=false;setLoginRole(appMode==="owner"?"owner":"customer");return;}
@@ -420,6 +608,16 @@
       if(customer)customer.vehicles.push(`${String(data.get("vehicle")).trim()} — ${String(data.get("reg")).trim()}`);
       persist();render();closeModal();toast("Vehicle added successfully.");return;
     }
+    if(action==="car-slide-prev"||action==="car-slide-next"){showCarSlide(carSlideIndex+(action==="car-slide-next"?1:-1));return;}
+    if(action==="add-category"){if(signedInUser?.role!=="owner"){toast("Only the owner can edit the service catalogue.");return;}addCategory();return;}
+    if(action==="save-category"){if(signedInUser?.role!=="owner"){toast("Only the owner can edit the service catalogue.");return;}saveCategory();return;}
+    if(action==="add-service"){if(signedInUser?.role!=="owner"){toast("Only the owner can edit the service catalogue.");return;}serviceEditor({category:selectedCategory});return;}
+    if(action==="edit-service"){if(signedInUser?.role!=="owner"){toast("Only the owner can edit the service catalogue.");return;}serviceEditor({category:button.dataset.category,index:Number(button.dataset.index)});return;}
+    if(action==="save-service"){if(signedInUser?.role!=="owner"){toast("Only the owner can edit the service catalogue.");return;}saveService(button);return;}
+    if(action==="delete-service"){if(signedInUser?.role!=="owner"){toast("Only the owner can edit the service catalogue.");return;}deleteService(button);return;}
+    if(action==="download-report"){downloadReport();return;}
+    if(action==="request-feedback"){requestFeedback(button.dataset.job);return;}
+    if(action==="send-feedback"){sendFeedback(button.dataset.job);return;}
     originalHandleAction(button);
   };
   const originalRender=render;
@@ -428,16 +626,25 @@
   $("#demo-login-form").addEventListener("submit",signIn);
   $("#login-phone").addEventListener("input",event=>event.target.setCustomValidity(""));
   $("#login-name").addEventListener("input",event=>event.target.setCustomValidity(""));
-  document.addEventListener("click",event=>{const viewButton=event.target.closest("[data-view]");if(viewButton&&signedInUser&&viewButton.dataset.view!==signedInUser.role)showPortal(signedInUser.role);});
+  document.addEventListener("click",event=>{
+    const categoryButton=event.target.closest("[data-catalog-category]");
+    if(categoryButton){selectedCategory=categoryButton.dataset.catalogCategory;renderCatalogNavigation();renderServices();renderCustomerCatalog();if(signedInUser?.role==="owner")gotoPage("services");return;}
+    const ratingButton=event.target.closest("[data-feedback-rating]");
+    if(ratingButton){feedbackRating=Number(ratingButton.dataset.feedbackRating);$$("[data-feedback-rating]").forEach(button=>button.classList.toggle("selected",Number(button.dataset.feedbackRating)<=feedbackRating));return;}
+    const viewButton=event.target.closest("[data-view]");if(viewButton&&signedInUser&&viewButton.dataset.view!==signedInUser.role)showPortal(signedInUser.role);
+  });
   const userFromStorage=()=>{try{return JSON.parse(localStorage.getItem(demoUserKey)||"null");}catch(error){console.error("Could not read the demo sign-in.",error);return null;}};
   setLoginRole(appMode==="owner"?"owner":"customer");
   if(appMode==="owner"||appMode==="customer")$$(".role-pick [data-login-role]").forEach(button=>button.hidden=button.dataset.loginRole!==appMode);
   const savedUser=userFromStorage();
   if(savedUser&&["owner","customer"].includes(savedUser.role)&&(!appMode||appMode===savedUser.role)){
-    if(savedUser.role!=="owner"||ownerNumbers.has(digits(savedUser.phone))){signedInUser=savedUser;$("#login-gate").hidden=true;showPortal(savedUser.role);}
+    if(savedUser.role!=="owner"||ownerNumbers.has(digits(savedUser.phone))){signedInUser=savedUser;$("#login-gate").hidden=true;showPortal(savedUser.role);showFeedbackForm();}
     else $("#login-gate").hidden=false;
   }else $("#login-gate").hidden=false;
-  const today=new Date();$("#today-label").textContent=today.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});render();
+  const originalEnterApp=enterApp;
+  enterApp=function(user){originalEnterApp(user);showFeedbackForm();};
+  const today=new Date();$("#today-label").textContent=today.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});render();showCarSlide(0);
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches)setInterval(()=>showCarSlide(carSlideIndex+1),5000);
   if("serviceWorker" in navigator&&window.isSecureContext)navigator.serviceWorker.register("./service-worker.js").catch(error=>console.error("The app could not enable offline support.",error));
 })();
 </script>

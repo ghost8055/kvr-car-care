@@ -2,6 +2,10 @@
 
 Installable web app for the KVR Car Care workshop and customer portal.
 
+## Download
+
+Download the [KVR Car Care app package](./KVR-Car-Care-PWA.zip) from this repository. Extract the ZIP and open `customer.html` or `owner.html` in a browser, or host the extracted files on an HTTPS website to install the apps on Android or iPhone. This is an installable web app package, not a standalone APK or iOS App Store app.
+
 ## Separate app entry points
 
 - **Customer app:** open `customer.html` (or `index.html?app=customer`).
